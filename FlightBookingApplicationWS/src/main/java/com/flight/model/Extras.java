@@ -1,28 +1,11 @@
 package com.flight.model;
 
 public class Extras {
-    int type;
     int preco;
-    //int newPreco;
     String tipoDeLugar;
-    String wifi;
-    String specialFood;
-
-    public Extras(int type, int preco, String tipoDeLugar, String wifi, String specialFood) {
-        this.type = type;
-        this.preco = preco;
-        this.tipoDeLugar = tipoDeLugar;
-        this.wifi = wifi;
-        this.specialFood = specialFood;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
+    boolean seguro;
+    boolean comida;
+    Mala mala;
 
     public int getPreco() {
         return preco;
@@ -40,19 +23,27 @@ public class Extras {
         this.tipoDeLugar = tipoDeLugar;
     }
 
-    public String getWifi() {
-        return wifi;
+    public boolean isSeguro() {
+        return seguro;
     }
 
-    public void setWifi(String wifi) {
-        this.wifi = wifi;
+    public void setSeguro(boolean seguro) {
+        this.seguro = seguro;
     }
 
-    public String getSpecialFood() {
-        return specialFood;
+    public boolean isComida() {
+        return comida;
     }
 
-    public void setSpecialFood(String specialFood) {
-        this.specialFood = specialFood;
+    public void setComida(boolean comida) {
+        this.comida = comida;
+    }
+
+    public Mala getMala() {
+        return mala;
+    }
+
+    public void setMala(Mala mala) {
+        this.mala = mala;
     }
 }

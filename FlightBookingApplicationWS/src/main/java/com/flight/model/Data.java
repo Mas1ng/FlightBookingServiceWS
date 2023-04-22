@@ -4,7 +4,7 @@ import com.flight.exceptions.InvalidDataException;
 
 import java.io.Serializable;
 
-public class Date implements Serializable {
+public class Data implements Serializable {
     private int day;
     private int month; // 1- january, ... 12- December
     private int year;
@@ -53,11 +53,11 @@ public class Date implements Serializable {
         }
         return result;
     }
-    public Date(){
+    public Data(){
         //default date
         setDate(1,1, 1900);
     }
-    public Date(int day, int month, int year){
+    public Data(int day, int month, int year){
         setDate(day,month, year);
     }
 
@@ -78,13 +78,13 @@ public class Date implements Serializable {
         dmy[2] = this.year;
     };
 
-    public boolean isEqualTo(Date obj) {
+    public boolean isEqualTo(Data obj) {
         if(this.day == obj.day && this.month == obj.month && this.year == obj.year){
             return true;
         }
         return false;
     }
-    public boolean isGreaterThan (Date obj) {
+    public boolean isGreaterThan (Data obj) {
         if(this.year > obj.year){
             return true;
         }
@@ -97,7 +97,7 @@ public class Date implements Serializable {
         return false;
     }
 
-    public boolean isSmallerThan (Date obj){
+    public boolean isSmallerThan (Data obj){
         if(this.isEqualTo(obj)){
             return false;
         }
@@ -106,5 +106,7 @@ public class Date implements Serializable {
         }
         return true;
     }
+
+
 
 }

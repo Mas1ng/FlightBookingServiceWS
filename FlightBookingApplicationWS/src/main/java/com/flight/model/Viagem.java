@@ -1,35 +1,26 @@
 package com.flight.model;
 
-import java.sql.Date;
-import java.util.ArrayList;
-
 public class Viagem {
+    private int counter=0;
     private String nomeViagem;
-    ArrayList<Lugar> lugares;
+    BilheteList bilheteList;
     int lugaresTotais;
     int lugaresUsados;
 
     String cidadeFinal;
     String cidadeInicial;
 
-    Date dataPartida;
-    Date dataChegada;
+    Data dataPartida;
+    Data dataChegada;
 
     int lugaresEconomicos;
     int lugaresExecutivos;
     int lugaresPrimeiraClasse;
 
-    //int oldESeats;
-    //int oldBSeats;
-    //int oldFSeats;
-    //int oldTSeats;
-
-    //public boolean isChanged;
-
-
-    public Viagem(String nomeViagem, ArrayList<Lugar> lugares, int lugaresTotais, int lugaresUsados, String cidadeFinal, String cidadeInicial, Date dataPartida, Date dataChegada, int lugaresEconomicos, int lugaresExecutivos, int lugaresPrimeiraClasse) {
-        this.nomeViagem = nomeViagem;
-        this.lugares = lugares;
+    public Viagem(BilheteList bilheteList, int lugaresTotais, int lugaresUsados, String cidadeFinal, String cidadeInicial, Data dataPartida, Data dataChegada, int lugaresEconomicos, int lugaresExecutivos, int lugaresPrimeiraClasse) {
+        counter++;
+        this.counter=counter;
+        this.bilheteList = bilheteList;
         this.lugaresTotais = lugaresTotais;
         this.lugaresUsados = lugaresUsados;
         this.cidadeFinal = cidadeFinal;
@@ -39,22 +30,36 @@ public class Viagem {
         this.lugaresEconomicos = lugaresEconomicos;
         this.lugaresExecutivos = lugaresExecutivos;
         this.lugaresPrimeiraClasse = lugaresPrimeiraClasse;
+        this.nomeViagem = setNomeViagem(cidadeFinal,cidadeInicial,counter);
+    }
+
+    public Viagem() {
+        this.bilheteList = new BilheteList();
+        this.dataPartida = new Data();
+        this.dataChegada = new Data();
+    }
+
+    public String setNomeViagem(String cidadeFinal, String cidadeInicial, int counter) {
+        char a1  =cidadeInicial.charAt(0) ;
+        char b1  =cidadeInicial.charAt(1) ;
+        char c1  =cidadeInicial.charAt(2) ;
+        char a2  =cidadeFinal.charAt(0) ;
+        char b2  =cidadeFinal.charAt(1) ;
+        char c2  =cidadeFinal.charAt(2) ;
+        String nomeViagem = a1+b1+c1+"x"+a2+b2+c2+counter;
+        return nomeViagem;
     }
 
     public String getNomeViagem() {
         return nomeViagem;
     }
 
-    public void setNomeViagem(String nomeViagem) {
-        this.nomeViagem = nomeViagem;
+    public BilheteList getSeats() {
+        return bilheteList;
     }
 
-    public ArrayList<Lugar> getSeats() {
-        return lugares;
-    }
-
-    public void setSeats(ArrayList<Lugar> seats) {
-        this.lugares = seats;
+    public void setSeats(BilheteList bilheteList) {
+        this.bilheteList = bilheteList;
     }
 
     public int getLugaresTotais() {
@@ -89,19 +94,19 @@ public class Viagem {
         this.cidadeInicial = cidadeInicial;
     }
 
-    public Date getDataPartida() {
+    public Data getDataPartida() {
         return dataPartida;
     }
 
-    public void setDataPartida(Date dataPartida) {
+    public void setDataPartida(Data dataPartida) {
         this.dataPartida = dataPartida;
     }
 
-    public Date getDataChegada() {
+    public Data getDataChegada() {
         return dataChegada;
     }
 
-    public void setDataChegada(Date dataChegada) {
+    public void setDataChegada(Data dataChegada) {
         this.dataChegada = dataChegada;
     }
 
@@ -127,9 +132,5 @@ public class Viagem {
 
     public void setLugaresPrimeiraClasse(int lugaresPrimeiraClasse) {
         this.lugaresPrimeiraClasse = lugaresPrimeiraClasse;
-    }
-
-    public void setCliente (Cliente c) {
-        lugares.get(lugaresTotais-lugaresUsados).setCliente(c);
     }
 }
