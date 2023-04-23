@@ -5,9 +5,9 @@ import com.flight.exceptions.InvalidDataException;
 import java.io.Serializable;
 
 public class Data implements Serializable {
-    private int day;
-    private int month; // 1- january, ... 12- December
-    private int year;
+    private int dia;
+    private int mes; // 1- january, ... 12- December
+    private int ano;
     private boolean isLeapYear(int year){
         // If a year is multiple of 400,
         // then it is a leap year
@@ -57,15 +57,15 @@ public class Data implements Serializable {
         //default date
         setDate(1,1, 1900);
     }
-    public Data(int day, int month, int year){
-        setDate(day,month, year);
+    public Data(int dia, int mes, int ano){
+        setDate(dia, mes, ano);
     }
 
     public void setDate(int day, int month, int year){
         if(isValid(day, month, year)){
-            this.day = day;
-            this.month = month;
-            this.year = year;
+            this.dia = day;
+            this.mes = month;
+            this.ano = year;
         }
         else{
             String msg = day + "/" + month +"/"+ year;
@@ -73,25 +73,25 @@ public class Data implements Serializable {
         }
     }
     public void getDate(int [] dmy) {
-        dmy[0] = this.day;
-        dmy[1] = this.month;
-        dmy[2] = this.year;
+        dmy[0] = this.dia;
+        dmy[1] = this.mes;
+        dmy[2] = this.ano;
     };
 
     public boolean isEqualTo(Data obj) {
-        if(this.day == obj.day && this.month == obj.month && this.year == obj.year){
+        if(this.dia == obj.dia && this.mes == obj.mes && this.ano == obj.ano){
             return true;
         }
         return false;
     }
     public boolean isGreaterThan (Data obj) {
-        if(this.year > obj.year){
+        if(this.ano > obj.ano){
             return true;
         }
-        if(this.month > obj.month){
+        if(this.mes > obj.mes){
             return true;
         }
-        if(this.day > obj.day){
+        if(this.dia > obj.dia){
             return true;
         }
         return false;

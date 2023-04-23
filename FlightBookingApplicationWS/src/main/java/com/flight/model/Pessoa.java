@@ -13,8 +13,10 @@ public class Pessoa implements Serializable {
         }
         return true;
     }
-    public Pessoa(String nome){
+    public Pessoa(Email email, String nome, Data data){
+        setEmail(email);
         setNome(nome);
+        setData(data);
     }
 
     public String getNome(){

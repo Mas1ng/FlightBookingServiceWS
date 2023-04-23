@@ -7,14 +7,9 @@ public class Cliente extends Pessoa implements Serializable {
     //ArrayList<Bilhete> bilhetes;
     private BilheteList bilheteList;
 
-    public Cliente(String name, BilheteList bilheteList, Viagem viagem) {
-        super(name);
+    public Cliente(Email email, String nome, Data data, BilheteList bilheteList) {
+        super(email, nome, data);
         this.bilheteList = bilheteList;
-    }
-
-    public Cliente(String name) {
-        super(name);
-        this.bilheteList = new BilheteList();
     }
 
     public BilheteList getBilhetes(){
