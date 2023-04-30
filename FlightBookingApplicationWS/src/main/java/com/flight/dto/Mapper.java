@@ -9,7 +9,10 @@ import java.util.ArrayList;
 
 public class Mapper {
     public static ClienteDto cliente2ClienteDto(Cliente args){
-        DataDto data = date2DateDto(args.getData());
+        DataDto data = null;
+        if (args.getData() != null) {
+            data = date2DateDto(args.getData());
+        }
         ClienteDto obj = new ClienteDto(args.getEmail(), args.getNome(), data);
         return obj;
     }
