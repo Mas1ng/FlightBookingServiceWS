@@ -1,6 +1,8 @@
 package com.flight.model;
 
-public class Viagem {
+import java.io.Serializable;
+
+public class Viagem implements Serializable {
     private int counter=0;
     private String nomeViagem;
     BilheteList bilheteList;

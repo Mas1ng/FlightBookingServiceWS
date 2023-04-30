@@ -1,8 +1,10 @@
 package com.flight.model;
 
-public class Extras {
+import java.io.Serializable;
+
+public class Extras implements Serializable {
     int preco;
-    String tipoDeLugar;
+    String tipoLugar;
     boolean seguro;
     boolean comida;
     Mala mala;
@@ -15,12 +17,12 @@ public class Extras {
         this.preco = preco;
     }
 
-    public String getTipoDeLugar() {
-        return tipoDeLugar;
+    public String getTipoLugar() {
+        return tipoLugar;
     }
 
-    public void setTipoDeLugar(String tipoDeLugar) {
-        this.tipoDeLugar = tipoDeLugar;
+    public void setTipoLugar(String tipoLugar) {
+        this.tipoLugar = tipoLugar;
     }
 
     public boolean isSeguro() {

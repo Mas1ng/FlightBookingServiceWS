@@ -1,6 +1,8 @@
 package com.flight.model;
 
-public class FBS {
+import java.io.Serializable;
+
+public class FBS implements Serializable {
     private String nome;
     private ClienteList clienteList;
     private BilheteList bilheteList;

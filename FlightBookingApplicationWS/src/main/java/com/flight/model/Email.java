@@ -1,14 +1,20 @@
 package com.flight.model;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Email {
+public class Email implements Serializable {
     String email;
+
+    public Email(String email) {
+        setEmail(email);
+    }
 
     public String getEmail() {
         return email;
     }
+
 
     public void setEmail(String email) {
         if(validateEmail(email))

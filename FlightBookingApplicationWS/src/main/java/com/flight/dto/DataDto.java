@@ -20,6 +20,9 @@ public class DataDto {
         this.ano = ano;
     }
 
+    public DataDto() {
+    }
+
     public int getDia() {
         return dia;
     }

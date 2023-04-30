@@ -13,7 +13,7 @@ public class FilesOperation {
     static String FBS_FILE ="fbs.dat";
 
     public static FBS loadFBS() {
-        FBS fbs = null;
+        FBS fbs = new FBS();
         Path file = Paths.get(FBS_FILE);
         try {
             ObjectInputStream o = new ObjectInputStream(new FileInputStream(file.toString()));

@@ -2,15 +2,18 @@ package com.flight.model;
 
 import com.flight.exceptions.EmailInvalidException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BilheteList {
+public class BilheteList implements Serializable {
     private ArrayList<Bilhete> bilhetes = new ArrayList<>();
 
-
+    public BilheteList() {
+        bilhetes = new ArrayList<Bilhete>();
+    }
 
     public void addBilhete(Bilhete bilhete) {
-    ArrayList<Bilhete> bilheteList = getBilheteListByNomeViagem(bilhete.viagem.getNomeViagem());
+    ArrayList<Bilhete> bilheteList = getBilheteListByNomeViagem(bilhete.nomeViagem);
     Bilhete b = getBilheteByNumLugar(bilheteList);
     if(b==null) {
         bilhetes.add(bilhete);
@@ -22,7 +25,7 @@ public class BilheteList {
     public Bilhete getBilheteByNumLugar(ArrayList<Bilhete> bilheteList) {
         for(Bilhete bilhete : bilhetes) {
             for(int i=0;i<bilheteList.size();i++) {
-                if(bilhete.getnumLugar()==bilheteList.get(i).getnumLugar()) {
+                if(bilhete.getNumLugar()==bilheteList.get(i).getNumLugar()) {
                     return bilhete;
                 }
             }
@@ -33,7 +36,7 @@ public class BilheteList {
     public ArrayList<Bilhete> getBilheteListByNomeViagem(String nomeViagem) {
         ArrayList<Bilhete> bilhetesByNomeViagem = new ArrayList<>();
         for(Bilhete bilhete : bilhetes) {
-            if(bilhete.viagem.getNomeViagem().equals(nomeViagem)) {
+            if(bilhete.nomeViagem.equals(nomeViagem)) {
                 bilhetesByNomeViagem.add(bilhete);
             }
         }
@@ -48,7 +51,7 @@ public class BilheteList {
 
     public void remove (Bilhete b) {
         for(Bilhete bilhete : bilhetes) {
-            if(bilhete.getnumLugar()==b.getnumLugar()) {
+            if(bilhete.getNumLugar()==b.getNumLugar()) {
                 bilhetes.remove(bilhete);
             }else {
                 String msg= "Errado numero de lugar de bilhete";
@@ -57,7 +60,7 @@ public class BilheteList {
         }
     }
 
-    public void update(Viagem viagemAntiga, int numLugarNovo, Viagem viagemNova, Extras extrasNovo, TipoPassageiro tipoPassageiroNovo) {
+    public void update(Viagem viagemAntiga, int numLugarNovo, String viagemNova, Extras extrasNovo, TipoPassageiro tipoPassageiroNovo) {
         ArrayList<Bilhete> bilheteList = getBilheteListByNomeViagem(viagemAntiga.getNomeViagem());
         Bilhete b = getBilheteByNumLugar(bilheteList);
         if(b!=null) {

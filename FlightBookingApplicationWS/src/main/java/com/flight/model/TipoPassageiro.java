@@ -1,6 +1,8 @@
 package com.flight.model;
 
-public enum TipoPassageiro {
+import java.io.Serializable;
+
+public enum TipoPassageiro implements Serializable {
     ADULTO,
     ADOLESCENTE,
     CRIANCA,

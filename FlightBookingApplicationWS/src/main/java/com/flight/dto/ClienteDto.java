@@ -10,14 +10,14 @@ import com.flight.model.Email;
 
 import java.io.Serializable;
 
-@JsonPropertyOrder({"nome","data","email"})
-@JacksonXmlRootElement(localName="Cliente")
+@JsonPropertyOrder({"email","nome","data"})
+@JacksonXmlRootElement(localName="clientes")
 public class ClienteDto implements Serializable {
-    @JacksonXmlProperty(localName = "bilhetes")
+    @JacksonXmlProperty(localName = "bilhete")
     private BilheteList bilheteList;
 
     @JacksonXmlProperty(localName = "email")
-    private Email email;
+    private String email;
 
     @JacksonXmlProperty(localName = "nome")
     private String nome;
@@ -25,14 +25,16 @@ public class ClienteDto implements Serializable {
     @JacksonXmlProperty(localName = "data")
     private DataDto data;
 
-    public ClienteDto(Email email, String nome, DataDto data) {
-        //this.bilheteList = bilheteList;
+    public ClienteDto(String email, String nome, DataDto data) {
         this.email = email;
         this.nome = nome;
         this.data = data;
     }
 
-    public Email getEmail() {
+    public ClienteDto() {
+    }
+
+    public String getEmail() {
         return email;
     }
 

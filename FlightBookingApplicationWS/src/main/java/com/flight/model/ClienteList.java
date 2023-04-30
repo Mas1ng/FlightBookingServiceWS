@@ -3,10 +3,15 @@ package com.flight.model;
 import com.flight.exceptions.EmailInvalidException;
 import com.flight.exceptions.InvalidDataException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ClienteList {
+public class ClienteList implements Serializable {
     private ArrayList<Cliente> clientes;
+
+    public ClienteList() {
+        clientes = new ArrayList<Cliente>();
+    }
 
     public void addCliente(Cliente cliente) {
         Cliente c = getClienteByEmail(cliente.getEmail());
@@ -17,11 +22,11 @@ public class ClienteList {
         }
     }
 
-    public Cliente getClienteByEmail(Email e){
+    public Cliente getClienteByEmail(String email){
         for (int i =0;i<clientes.size();i++) {
             Cliente cliente = clientes.get(i);
-            if(cliente.getEmail().getEmail().equals(e.getEmail())){
-                return  cliente;
+            if(cliente.getEmail().equals(email)){
+                return cliente;
             }
         }
         return null;
@@ -33,9 +38,9 @@ public class ClienteList {
         return clienteList;
     }
 
-    public void remove(Email email) {
+    public void remove(String email) {
         for(Cliente cliente : clientes) {
-            if(cliente.getEmail().getEmail().equals(email.getEmail())) {
+            if(cliente.getEmail().equals(email)) {
                 clientes.remove(cliente);
             } else {
                 String msg= "O email \"" + email + "\"não esta associado a nenhum cliente";
@@ -44,7 +49,7 @@ public class ClienteList {
         }
     }
 
-    public void update(String nomeNovo, Email emailAntigo, Data dataNovo, Email emailNovo) {
+    public void update(String nomeNovo, String emailAntigo, Data dataNovo, String emailNovo) {
         Cliente cliente = getClienteByEmail(emailAntigo);
         if(cliente != null) {
             cliente.setData(dataNovo);

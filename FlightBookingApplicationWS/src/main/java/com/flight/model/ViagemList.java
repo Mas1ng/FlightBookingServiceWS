@@ -2,10 +2,15 @@ package com.flight.model;
 
 import com.flight.exceptions.EmailInvalidException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ViagemList {
+public class ViagemList implements Serializable {
     private ArrayList<Viagem> viagens;
+
+    public ViagemList() {
+        viagens = new ArrayList<Viagem>();
+    }
 
     public void addViagem(Viagem viagem) {
         Viagem v = getViagemByNomeViagem(viagem.getNomeViagem());

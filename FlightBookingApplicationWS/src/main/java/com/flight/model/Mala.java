@@ -1,6 +1,8 @@
 package com.flight.model;
 
-public enum Mala {
+import java.io.Serializable;
+
+public enum Mala implements Serializable {
     PEQUANA,
     MEDIA,
     GRANDE

@@ -1,29 +1,42 @@
 package com.flight.model;
 
-public class Bilhete {
+import java.io.Serializable;
+
+public class Bilhete implements Serializable {
     int numLugar;
-    Viagem viagem;
+    String nomeViagem;
     Extras extras;
     TipoPassageiro tipoPassageiro;
 
-    public Bilhete(int numLugar, Viagem viagem, Extras extras, TipoPassageiro tipoPassageiro) {
+    public Bilhete(int numLugar, String nomeViagem, Extras extras, TipoPassageiro tipoPassageiro) {
          this.numLugar = numLugar;
-         this.viagem= viagem;
+         this.nomeViagem= nomeViagem;
          this.extras = extras;
          this.tipoPassageiro = tipoPassageiro;
     }
 
-    public int getnumLugar()
-    {
+    public int getNumLugar() {
         return numLugar;
+    }
+
+    public String getNomeViagem() {
+        return nomeViagem;
+    }
+
+    public Extras getExtras() {
+        return extras;
+    }
+
+    public TipoPassageiro getTipoPassageiro() {
+        return tipoPassageiro;
     }
 
     public void setNumLugar(int numLugar) {
         this.numLugar = numLugar;
     }
 
-    public void setViagem(Viagem viagem) {
-        this.viagem = viagem;
+    public void setViagem(String nomeViagem) {
+        this.nomeViagem = nomeViagem;
     }
 
     public void setExtras(Extras extras) {

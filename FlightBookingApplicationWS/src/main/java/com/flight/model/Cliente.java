@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Cliente extends Pessoa implements Serializable {
-    //ArrayList<Bilhete> bilhetes;
     private BilheteList bilheteList;
 
-    public Cliente(Email email, String nome, Data data, BilheteList bilheteList) {
+    public Cliente(String email, String nome, Data data, BilheteList bilheteList) {
         super(email, nome, data);
         this.bilheteList = bilheteList;
+    }
+    public Cliente(String email, String nome, Data data) {
+        super(email, nome, data);
+        this.bilheteList = new BilheteList();
     }
 
     public BilheteList getBilhetes(){
