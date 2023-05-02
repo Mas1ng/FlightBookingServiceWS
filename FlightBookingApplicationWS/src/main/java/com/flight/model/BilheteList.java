@@ -13,8 +13,8 @@ public class BilheteList implements Serializable {
     }
 
     public void addBilhete(Bilhete bilhete) {
-        ArrayList<Bilhete> bilheteList = getBilheteListByNomeViagem(bilhete.nomeViagem);
-        Bilhete b = getBilheteByNumLugar(bilheteList);
+        BilheteList bilheteList = getBilheteListByNome(bilhete.nomeViagem);
+        Bilhete b = bilheteList.getBilheteByNum(bilhete.numLugar);
 
         if(b==null) {
             bilhetes.add(bilhete);
@@ -64,7 +64,7 @@ public class BilheteList implements Serializable {
 
     public ArrayList<Bilhete> getAll() {
         ArrayList<Bilhete> bilhetelist = new ArrayList<>();
-        bilhetes.addAll(this.bilhetes);
+        bilhetelist.addAll(this.bilhetes);
         return  bilhetelist;
     }
 

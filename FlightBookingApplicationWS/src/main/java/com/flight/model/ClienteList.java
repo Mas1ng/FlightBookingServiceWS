@@ -1,5 +1,6 @@
 package com.flight.model;
 
+import com.flight.exceptions.ClienteDuplicadoException;
 import com.flight.exceptions.EmailInvalidException;
 import com.flight.exceptions.InvalidDataException;
 
@@ -15,10 +16,10 @@ public class ClienteList implements Serializable {
 
     public void addCliente(Cliente cliente) {
         Cliente c = getClienteByEmail(cliente.getEmail());
-        if (c == null){
+        if (c == null) {
             clientes.add(cliente);
-        }else {
-            //throw new ClienteDuplicadoException(cliente.getEmail());
+        } else {
+            throw new ClienteDuplicadoException(cliente.getEmail());
         }
     }
 
@@ -28,7 +29,8 @@ public class ClienteList implements Serializable {
             if(cliente.getEmail().equals(email)){
                 return cliente;
             }
-        }return null;
+        }
+        return null;
     }
 
     public ArrayList<Cliente> getAll() {
