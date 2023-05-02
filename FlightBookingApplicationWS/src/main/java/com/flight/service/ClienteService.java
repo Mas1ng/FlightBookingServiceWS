@@ -4,7 +4,6 @@ import com.flight.dto.ClienteDto;
 import com.flight.dto.ClienteListDto;
 import com.flight.dto.Mapper;
 import com.flight.model.Cliente;
-import com.flight.model.Email;
 import com.flight.model.FBS;
 import com.flight.repository.FilesOperation;
 
@@ -21,6 +20,7 @@ public class ClienteService {
 
     public static ClienteDto getCliente(String email) {
         FBS fbs = FilesOperation.loadFBS();
+        System.out.println(fbs.getClienteList().getAll());
         Cliente item = fbs.getClienteList().getClienteByEmail(email);
         ClienteDto result = Mapper.cliente2ClienteDto(item);
         return result;

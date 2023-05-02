@@ -9,6 +9,23 @@ public class Extras implements Serializable {
     boolean comida;
     Mala mala;
 
+    public Extras(int preco, String tipoLugar, boolean seguro, boolean comida, Mala mala) {
+        this.preco = preco;
+        this.tipoLugar = tipoLugar;
+        this.seguro = seguro;
+        this.comida = comida;
+        this.mala = mala;
+    }
+
+    public void getextra(String [] args)
+    {
+        args[0]= String.valueOf(this.preco);
+        args[1]= this.tipoLugar;
+        args[2] = String.valueOf(this.seguro);
+        args[3] = String.valueOf(this.comida);
+        args[4] = String.valueOf(this.mala);
+    }
+
     public int getPreco() {
         return preco;
     }

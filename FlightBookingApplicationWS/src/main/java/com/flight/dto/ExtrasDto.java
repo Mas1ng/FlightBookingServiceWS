@@ -23,6 +23,14 @@ public class ExtrasDto {
     public ExtrasDto() {
     }
 
+    public ExtrasDto(int preco, String tipoLugar, boolean seguro, boolean comida, Mala mala) {
+        this.preco = preco;
+        this.tipoLugar = tipoLugar;
+        this.seguro = seguro;
+        this.comida = comida;
+        this.mala = mala;
+    }
+
     public int getPreco() {
         return preco;
     }

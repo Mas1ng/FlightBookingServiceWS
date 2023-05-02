@@ -1,17 +1,13 @@
-package com.flight.dto;
+/*package com.flight.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.flight.model.BilheteList;
 
 
 @JsonPropertyOrder({"email","nome","data"})
-@JacksonXmlRootElement(localName="clientes")
-public class ClienteDto {
-
-    @JacksonXmlProperty(localName = "bilhete")
-    private BilheteList bilheteList;
+@JacksonXmlRootElement(localName="pessoas")
+public class PessoaDto {
 
     @JacksonXmlProperty(localName = "email")
     private String email;
@@ -43,3 +39,5 @@ public class ClienteDto {
         return data;
     }
 }
+
+*/

@@ -15,14 +15,14 @@ public class BilheteDto {
     @JacksonXmlProperty(localName="nomeViagem")
     private String nomeViagem;
     @JacksonXmlProperty(localName="extras")
-    private Extras extras;
+    private ExtrasDto extras;
     @JacksonXmlProperty(localName="tipoPassageiro")
     private TipoPassageiro tipoPassageiro;
 
     public BilheteDto() {
     }
 
-    public BilheteDto(int numLugar, String nomeViagem, Extras extras, TipoPassageiro tipoPassageiro) {
+    public BilheteDto(int numLugar, String nomeViagem, ExtrasDto extras, TipoPassageiro tipoPassageiro) {
         this.numLugar = numLugar;
         this.nomeViagem = nomeViagem;
         this.extras = extras;
@@ -37,7 +37,7 @@ public class BilheteDto {
         return nomeViagem;
     }
 
-    public Extras getExtras() {
+    public ExtrasDto getExtrasDto() {
         return extras;
     }
 

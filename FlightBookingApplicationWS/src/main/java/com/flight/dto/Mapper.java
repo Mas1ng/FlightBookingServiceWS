@@ -1,24 +1,19 @@
 package com.flight.dto;
 
-import com.flight.model.Bilhete;
-import com.flight.model.Cliente;
-import com.flight.model.Data;
-import com.flight.model.Email;
+import com.flight.model.*;
 
 import java.util.ArrayList;
 
 public class Mapper {
     public static ClienteDto cliente2ClienteDto(Cliente args){
-        DataDto data = null;
-        if (args.getData() != null) {
-            data = date2DateDto(args.getData());
-        }
+        DataDto data = date2DateDto(args.getData());
         ClienteDto obj = new ClienteDto(args.getEmail(), args.getNome(), data);
         return obj;
     }
 
     public static BilheteDto bilhete2BilheteDto(Bilhete args){
-        BilheteDto obj = new BilheteDto(args.getNumLugar(), args.getNomeViagem(), args.getExtras(), args.getTipoPassageiro());
+        ExtrasDto extrasDto = extra2ExtraDto(args.getExtras());
+        BilheteDto obj = new BilheteDto(args.getNumLugar(), args.getNomeViagem(), extrasDto, args.getTipoPassageiro());
         return obj;
     }
 
@@ -31,6 +26,10 @@ public class Mapper {
         ClienteListDto obj = new ClienteListDto(lista);
         return obj;
     }
+
+    /*public static PessoaListDto pessoaList2PessoaListDto(ArrayList<Pessoa> arg) {
+
+    }*/
 
     public static BilheteListDto bilheteList2BilheteListDto(ArrayList<Bilhete> arg) {
         ArrayList<BilheteDto> lista = new ArrayList<>();
@@ -78,4 +77,20 @@ public class Mapper {
         Cliente  obj = new Cliente(arg.getExtras(),arg.getNomeViagem());
         return obj;
     }*/
+
+    public static Extras extrasDto2Extra ( ExtrasDto arg)
+    {
+        Extras obj = new Extras(arg.getPreco(), arg.getTipoLugar(), arg.isComida(), arg.isSeguro(), arg.getMala());
+        return obj;
+    }
+    public static ExtrasDto extra2ExtraDto( Extras arg)
+    {
+        ExtrasDto obj = new ExtrasDto(arg.getPreco(), arg.getTipoLugar(), arg.isSeguro(),arg.isComida(),arg.getMala());
+        return obj;
+    }
+    public static Bilhete bilheteDto2Bilhete(BilheteDto arg) {
+        Extras extra = extrasDto2Extra(arg.getExtrasDto());
+        Bilhete  b = new Bilhete(arg.getNumLugar(), arg.getNomeViagem(), extra, arg.getTipoPassageiro());
+        return b;
+    }
 }
