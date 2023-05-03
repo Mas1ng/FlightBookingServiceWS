@@ -1,4 +1,4 @@
-/*package com.flight.dto;
+package com.flight.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -18,13 +18,13 @@ public class PessoaDto {
     @JacksonXmlProperty(localName = "data")
     private DataDto data;
 
-    public ClienteDto(String email, String nome, DataDto data) {
+    public PessoaDto(String email, String nome, DataDto data) {
         this.email = email;
         this.nome = nome;
         this.data = data;
     }
 
-    public ClienteDto() {
+    public PessoaDto() {
     }
 
     public String getEmail() {
@@ -39,5 +39,3 @@ public class PessoaDto {
         return data;
     }
 }
-
-*/

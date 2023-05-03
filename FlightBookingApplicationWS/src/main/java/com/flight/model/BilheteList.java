@@ -11,6 +11,9 @@ public class BilheteList implements Serializable {
     public BilheteList() {
         bilhetes = new ArrayList<Bilhete>();
     }
+    public BilheteList(ArrayList<Bilhete> bilhetes) {
+        this.bilhetes = bilhetes;
+    }
 
     public void addBilhete(Bilhete bilhete) {
         BilheteList bilheteList = getBilheteListByNome(bilhete.nomeViagem);
@@ -22,8 +25,23 @@ public class BilheteList implements Serializable {
             //throw new ClienteDuplicadoException(cliente.getEmail());
         }
     }
+    public void addBilheteList(BilheteList bilheteList) {
+        for(int i=0;i<bilheteList.sizeBilheteList();i++) {
+            bilhetes.add(bilheteList.getBilheteListIndex(i));
+        }
+    }
+    public int sizeBilheteList() {
+        int size=0;
+        for(Bilhete bilhete : bilhetes) {
+            size++;
+        }
+        return size;
+    }
+    public Bilhete getBilheteListIndex(int i){
+        Bilhete b = bilhetes.get(i);
+        return b;
 
-
+    }
     public  Bilhete getBilheteByNumLugar(ArrayList<Bilhete> bilheteList) {
         for(Bilhete bilhete : bilheteList) {
             for(int i=0;i<bilheteList.size();i++) {

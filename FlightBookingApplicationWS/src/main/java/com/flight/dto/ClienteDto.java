@@ -7,7 +7,7 @@ import com.flight.model.BilheteList;
 
 
 @JsonPropertyOrder({"email","nome","data"})
-@JacksonXmlRootElement(localName="clientes")
+@JacksonXmlRootElement(localName="cliente")
 public class ClienteDto {
 
     @JacksonXmlProperty(localName = "bilhete")

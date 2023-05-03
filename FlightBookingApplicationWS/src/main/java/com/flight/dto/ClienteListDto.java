@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @JacksonXmlRootElement(localName="clientes")
 public class ClienteListDto {
     @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "clientes")
+    @JacksonXmlProperty(localName = "cliente")
     private ArrayList<ClienteDto> clientes;
 
     public ClienteListDto() {

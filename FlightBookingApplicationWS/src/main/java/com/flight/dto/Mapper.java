@@ -51,21 +51,10 @@ public class Mapper {
         return obj;
     }
 
-    /*public static EmailDto email2EmailDto(Email arg){
-        String email = arg.getEmail();
-        EmailDto obj = new EmailDto(email);
-        return obj;
-    }*/
     public static Data dataDto2Data(DataDto arg){
         Data  obj = new Data(arg.getDia(),arg.getMes(),arg.getAno());
         return obj;
     }
-
-    /*
-    public static Email emailDto2Email(EmailDto arg) {
-        Email obj = new Email(arg.getEmail());
-        return obj;
-    }*/
 
     public static Cliente clienteDto2Cliente(ClienteDto arg){
         Data date = dataDto2Data(arg.getData());
@@ -92,5 +81,15 @@ public class Mapper {
         Extras extra = extrasDto2Extra(arg.getExtrasDto());
         Bilhete  b = new Bilhete(arg.getNumLugar(), arg.getNomeViagem(), extra, arg.getTipoPassageiro());
         return b;
+    }
+
+    public static BilheteList clienteBilheteListDto2ClienteBilheteList(ClienteBilhetesDto arg) {
+        ArrayList<Bilhete> lista = new ArrayList<>();
+        for(int i=0;i<arg.getBilhetes().size();i++) {
+            Bilhete b = bilheteDto2Bilhete(arg.getBilhetes().get(i));
+            lista.add(b);
+        }
+        BilheteList obj = new BilheteList(lista);
+        return obj;
     }
 }

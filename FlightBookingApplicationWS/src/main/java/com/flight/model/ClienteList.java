@@ -50,7 +50,7 @@ public class ClienteList implements Serializable {
         }
     }
 
-    public void update(String nomeNovo, String emailAntigo, Data dataNovo, String emailNovo) {
+    public void update(String emailAntigo, String nomeNovo, Data dataNovo, String emailNovo) {
         Cliente cliente = getClienteByEmail(emailAntigo);
         if(cliente != null) {
             cliente.setData(dataNovo);
@@ -58,6 +58,19 @@ public class ClienteList implements Serializable {
             cliente.setNome(nomeNovo);
         } else {
             String msg= "O email \"" + emailAntigo + "\"não esta associado a nenhum cliente";
+            throw new EmailInvalidException(msg);
+        }
+    }
+    public void updateBilhete(BilheteList b, String email) {
+        Cliente cliente = getClienteByEmail(email);
+        if(cliente != null) {
+            if(cliente.getBilhetes()==null){
+                cliente.setBilhetes(b);
+            }else {
+                cliente.getBilhetes().addBilheteList(b);
+            }
+        } else {
+            String msg= "O email \"" + email + "\"não esta associado a nenhum cliente";
             throw new EmailInvalidException(msg);
         }
     }

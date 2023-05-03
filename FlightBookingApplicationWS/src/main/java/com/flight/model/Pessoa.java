@@ -1,4 +1,5 @@
 package com.flight.model;
+import com.flight.exceptions.EmailInvalidException;
 import com.flight.exceptions.InvalidDataException;
 
 import java.io.Serializable;
@@ -46,10 +47,14 @@ public class Pessoa implements Serializable {
     }
 
     public void setEmail(String email) {
-        if(validateEmail(email))
-        {
-            this.email = email;
-        }
+        try {
+            if (validateEmail(email)) {
+                this.email = email;
+            } else {
+                String msg = "Email invalido";
+                throw new EmailInvalidException(msg);
+            }
+        }catch (EmailInvalidException e) {}
     }
 
     public boolean validateEmail(String email){
