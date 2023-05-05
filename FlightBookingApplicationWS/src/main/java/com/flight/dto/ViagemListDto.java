@@ -8,20 +8,20 @@ import java.util.ArrayList;
 public class ViagemListDto {
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "viagem")
-    private ArrayList<ViagemListDto> viagens;
+    private ArrayList<ViagemDto> viagens;
 
     public ViagemListDto() {
     }
 
-    public ViagemListDto(ArrayList<ViagemListDto> viagens) {
+    public ViagemListDto(ArrayList<ViagemDto> viagens) {
         this.viagens = viagens;
     }
 
-    public ArrayList<ViagemListDto> getViagens() {
+    public ArrayList<ViagemDto> getViagens() {
         return viagens;
     }
 
-    public void setViagens(ArrayList<ViagemListDto> viagens) {
+    public void setViagens(ArrayList<ViagemDto> viagens) {
         this.viagens = viagens;
     }
 }

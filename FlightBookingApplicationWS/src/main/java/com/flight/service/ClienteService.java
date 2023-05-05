@@ -4,10 +4,7 @@ import com.flight.dto.ClienteBilhetesDto;
 import com.flight.dto.ClienteDto;
 import com.flight.dto.ClienteListDto;
 import com.flight.dto.Mapper;
-import com.flight.model.BilheteList;
-import com.flight.model.Cliente;
-import com.flight.model.Data;
-import com.flight.model.FBS;
+import com.flight.model.*;
 import com.flight.repository.FilesOperation;
 
 import java.util.ArrayList;
@@ -41,11 +38,17 @@ public class ClienteService {
         fbs.getClienteList().update(email, arg.getNome(),data,arg.getEmail());
         FilesOperation.storeFBS(fbs);
     }
-    public static void updateClienteBilhetes(ClienteBilhetesDto arg, String email){
-        FBS fbs = FilesOperation.loadFBS();
-        BilheteList item = Mapper.clienteBilheteListDto2ClienteBilheteList(arg);
-        fbs.getClienteList().updateBilhete(item, email);
-        FilesOperation.storeFBS(fbs);
+    public static void updateClienteBilhetes(ClienteBilhetesDto arg){
+        try {
+            FBS fbs = FilesOperation.loadFBS();
+            BilheteList item = Mapper.clienteBilheteListDto2ClienteBilheteList(arg);
+
+            ViagemList viagemList=fbs.getViagemList();
+            if(ViagemList.validarBilheteList(item,viagemList)) {
+                fbs.getClienteList().updateBilhete(item, arg.getEmail());
+                FilesOperation.storeFBS(fbs);
+            }else {throw new Exception();}
+        }catch (Exception e){}
     }
     public static void removeCliente(String email){
         FBS fbs = FilesOperation.loadFBS();

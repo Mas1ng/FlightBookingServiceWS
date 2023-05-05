@@ -17,6 +17,9 @@ public class Extras implements Serializable {
         this.mala = mala;
     }
 
+    public Extras() {
+    }
+
     public void getextra(String [] args)
     {
         args[0]= String.valueOf(this.preco);

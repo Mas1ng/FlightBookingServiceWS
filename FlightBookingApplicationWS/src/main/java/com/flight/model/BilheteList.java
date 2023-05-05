@@ -5,6 +5,8 @@ import com.flight.exceptions.EmailInvalidException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static com.flight.model.TipoBilhete.*;
+
 public class BilheteList implements Serializable {
     private ArrayList<Bilhete> bilhetes = new ArrayList<>();
 
@@ -13,6 +15,29 @@ public class BilheteList implements Serializable {
     }
     public BilheteList(ArrayList<Bilhete> bilhetes) {
         this.bilhetes = bilhetes;
+    }
+
+    public BilheteList(String nomeViagem,int total,int nEc,int nEx,int nPr) {
+        BilheteList bilheteList = new BilheteList();
+        TipoBilhete economico = ECONOMICO;
+        TipoBilhete executivo = EXECUTIVO;
+        TipoBilhete primeiraclasse = PRIMEIRACLASSE;
+        int i=0;
+        for(i=0;i<nEc;i++) {
+            int nec = i+1;
+            Bilhete b = new Bilhete(nec,nomeViagem,economico);
+            bilheteList.addBilhete(b);
+        }
+        for(i=0;i<nEx;i++) {
+            int nex = nEc+i+1;
+            Bilhete b = new Bilhete(nex,nomeViagem,executivo);
+            bilheteList.addBilhete(b);
+        }
+        for(i=0;i<nPr;i++) {
+            int npr = nEx+nEc+i+1;
+            Bilhete b = new Bilhete(npr,nomeViagem,primeiraclasse);
+            bilheteList.addBilhete(b);
+        }
     }
 
     public void addBilhete(Bilhete bilhete) {
@@ -40,7 +65,6 @@ public class BilheteList implements Serializable {
     public Bilhete getBilheteListIndex(int i){
         Bilhete b = bilhetes.get(i);
         return b;
-
     }
     public  Bilhete getBilheteByNumLugar(ArrayList<Bilhete> bilheteList) {
         for(Bilhete bilhete : bilheteList) {

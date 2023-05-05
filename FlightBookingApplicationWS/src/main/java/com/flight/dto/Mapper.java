@@ -1,19 +1,20 @@
 package com.flight.dto;
 
 import com.flight.model.*;
+import com.flight.repository.FilesOperation;
 
 import java.util.ArrayList;
 
 public class Mapper {
     public static ClienteDto cliente2ClienteDto(Cliente args){
-        DataDto data = date2DateDto(args.getData());
+        DataDto data = data2DataDto(args.getData());
         ClienteDto obj = new ClienteDto(args.getEmail(), args.getNome(), data);
         return obj;
     }
 
     public static BilheteDto bilhete2BilheteDto(Bilhete args){
         ExtrasDto extrasDto = extra2ExtraDto(args.getExtras());
-        BilheteDto obj = new BilheteDto(args.getNumLugar(), args.getNomeViagem(), extrasDto, args.getTipoPassageiro());
+        BilheteDto obj = new BilheteDto(args.getNumLugar(), args.getNomeViagem(), extrasDto, args.getTipoPassageiro(),args.getTipoBilhete());
         return obj;
     }
 
@@ -41,7 +42,7 @@ public class Mapper {
         return obj;
     }
 
-    public static DataDto date2DateDto(Data arg){
+    public static DataDto data2DataDto(Data arg){
         if (arg == null) {
             return null;
         }
@@ -79,7 +80,7 @@ public class Mapper {
     }
     public static Bilhete bilheteDto2Bilhete(BilheteDto arg) {
         Extras extra = extrasDto2Extra(arg.getExtrasDto());
-        Bilhete  b = new Bilhete(arg.getNumLugar(), arg.getNomeViagem(), extra, arg.getTipoPassageiro());
+        Bilhete  b = new Bilhete(arg.getNumLugar(), arg.getNomeViagem(), extra, arg.getTipoPassageiro(),arg.getTipoBilhete());
         return b;
     }
 
@@ -91,5 +92,32 @@ public class Mapper {
         }
         BilheteList obj = new BilheteList(lista);
         return obj;
+    }
+
+    public static ViagemListDto viagemList2ViagemListDto(ArrayList<Viagem> arg) {
+        ArrayList<ViagemDto> lista = new ArrayList<>();
+        for(Viagem viagem : arg) {
+            ViagemDto item = viagem2ViagemDto(viagem);
+            lista.add(item);
+        }
+        ViagemListDto obj = new ViagemListDto(lista);
+        return obj;
+    }
+
+    public static ViagemDto viagem2ViagemDto(Viagem args){
+        DataDto datapDto = data2DataDto(args.getDataPartida());
+        DataDto datacDto = data2DataDto(args.getDataChegada());
+        ViagemDto obj = new ViagemDto(args.getNomeViagem(), args.getLugaresTotais(), args.getCompanhia(), args.getCidadeInicial(), args.getCidadeFinal(),datapDto,datacDto,args.getLugaresEconomicos(),args.getLugaresExecutivos(),args.getLugaresPrimeiraClasse());
+        return obj;
+    }
+
+    public static Viagem viagemDto2Viagem(ViagemDto arg){
+        try {
+            Data datap = dataDto2Data(arg.getDataPartida());
+            Data datac = dataDto2Data(arg.getDataChegada());
+            Viagem  obj = new Viagem(arg.getCompanhia(), arg.getLugaresTotais(), arg.getCidadeInicial(), arg.getCidadeInicial(), datap, datac, arg.getLugaresEconomicos(), arg.getLugaresExecutivos(), arg.getLugaresPrimeiraClasse());
+            return obj;
+        } catch (Exception e) {}
+
     }
 }

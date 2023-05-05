@@ -7,12 +7,22 @@ public class Bilhete implements Serializable {
     String nomeViagem;
     Extras extras;
     TipoPassageiro tipoPassageiro;
+    TipoBilhete tipoBilhete;
 
-    public Bilhete(int numLugar, String nomeViagem, Extras extras, TipoPassageiro tipoPassageiro) {
+
+    public Bilhete(int numLugar, String nomeViagem, Extras extras, TipoPassageiro tipoPassageiro,TipoBilhete tipoBilhete) {
          this.numLugar = numLugar;
          this.nomeViagem= nomeViagem;
          this.extras = extras;
          this.tipoPassageiro = tipoPassageiro;
+         this.tipoBilhete = tipoBilhete;
+    }
+
+    public Bilhete(int numLugar, String nomeViagem,TipoBilhete tipoBilhete) {
+        this.numLugar = numLugar;
+        this.nomeViagem = nomeViagem;
+        this.tipoBilhete = tipoBilhete;
+        this.extras = new Extras();
     }
 
     public int getNumLugar() {
@@ -45,5 +55,13 @@ public class Bilhete implements Serializable {
 
     public void setTipoPassageiro(TipoPassageiro tipoPassageiro) {
         this.tipoPassageiro = tipoPassageiro;
+    }
+
+    public TipoBilhete getTipoBilhete() {
+        return tipoBilhete;
+    }
+
+    public void setTipoBilhete(TipoBilhete tipoBilhete) {
+        this.tipoBilhete = tipoBilhete;
     }
 }

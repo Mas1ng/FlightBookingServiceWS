@@ -52,12 +52,12 @@ public class ClienteController {
             return new ResponseEntity<>(new ErrorDto(e.getMessage()), HttpStatus.CONFLICT);
         }
     }
-    @PutMapping(value = "/clientesB/{email}",
+    @PutMapping(value = "/clientes",
             consumes = MediaType.APPLICATION_XML_VALUE,
             produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<Object> updateCliente(@PathVariable("email") String email, @RequestBody ClienteBilhetesDto arg) {
+    public ResponseEntity<Object> updateCliente(@RequestBody ClienteBilhetesDto arg) {
         try {
-            ClienteService.updateClienteBilhetes(arg,email);
+            ClienteService.updateClienteBilhetes(arg);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorDto(e.getMessage()), HttpStatus.CONFLICT);

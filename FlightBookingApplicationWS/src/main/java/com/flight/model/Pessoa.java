@@ -22,6 +22,11 @@ public class Pessoa implements Serializable {
         setData(data);
     }
 
+    public Pessoa(String nome, Data data) {
+        this.nome = nome;
+        this.data = data;
+    }
+
     public String getNome(){
         return this.nome;
     }

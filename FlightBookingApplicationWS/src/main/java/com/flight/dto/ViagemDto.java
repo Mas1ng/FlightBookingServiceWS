@@ -3,42 +3,39 @@ package com.flight.dto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.flight.model.Companhia;
 
 
-@JsonPropertyOrder({"nomeViagem", "lugaresTotais","lugaresUsados", "company", "cidadeFinal", "cidadeInicial", "dataPartida", "dataChegada", "lugaresEconomicos", "lugaresExecutivos", "lugaresPrimeiraClasse"} )
+@JsonPropertyOrder({"nomeViagem","lugaresTotais", "companhia", "cidadeInicial","cidadeFinal", "dataPartida", "dataChegada", "lugaresEconomicos", "lugaresExecutivos", "lugaresPrimeiraClasse"} )
 @JacksonXmlRootElement(localName = "viagem")
 public class ViagemDto {
     @JacksonXmlProperty(localName = "nomeViagem")
     private String nomeViagem;
     @JacksonXmlProperty(localName = "LugaresTotais")
-    private String LugaresTotais;
-    @JacksonXmlProperty(localName = "LugaresUsados")
-    private String LugaresUsados;
-    @JacksonXmlProperty(localName = "company")
-    private String company;
+    private int LugaresTotais;
+    @JacksonXmlProperty(localName = "companhia")
+    private Companhia companhia;
     @JacksonXmlProperty(localName = "cidadeFinal")
     private String cidadeFinal;
     @JacksonXmlProperty(localName = "cidadeInicial")
     private String cidadeInicial;
     @JacksonXmlProperty(localName = "dataPartida")
-    private String dataPartida;
+    private DataDto dataPartida;
     @JacksonXmlProperty(localName = "dataChegada")
-    private String dataChegada;
+    private DataDto dataChegada;
     @JacksonXmlProperty(localName = "lugaresEconomicos")
-    private String lugaresEconomicos;
+    private int lugaresEconomicos;
     @JacksonXmlProperty(localName = "lugaresExecutivos")
-    private String lugaresExecutivos;
+    private int lugaresExecutivos;
     @JacksonXmlProperty(localName = "lugaresPrimeiraClasse")
-    private String lugaresPrimeiraClasse;
+    private int lugaresPrimeiraClasse;
 
     public ViagemDto() {
     }
 
-    public ViagemDto(String nomeViagem, String lugaresTotais, String lugaresUsados, String company, String cidadeFinal, String cidadeInicial, String dataPartida, String dataChegada, String lugaresEconomicos, String lugaresExecutivos, String lugaresPrimeiraClasse) {
-        this.nomeViagem = nomeViagem;
-        LugaresTotais = lugaresTotais;
-        LugaresUsados = lugaresUsados;
-        this.company = company;
+    public ViagemDto(int lugaresTotais, Companhia companhia, String cidadeInicial, String cidadeFinal, DataDto dataPartida, DataDto dataChegada, int lugaresEconomicos, int lugaresExecutivos, int lugaresPrimeiraClasse) {
+        this.LugaresTotais = lugaresTotais;
+        this.companhia = companhia;
         this.cidadeFinal = cidadeFinal;
         this.cidadeInicial = cidadeInicial;
         this.dataPartida = dataPartida;
@@ -48,91 +45,44 @@ public class ViagemDto {
         this.lugaresPrimeiraClasse = lugaresPrimeiraClasse;
     }
 
-    public String getNomeViagem() {
-        return nomeViagem;
+    public ViagemDto(String nomeViagem, int lugaresTotais, Companhia companhia, String cidadeInicial, String cidadeFinal, DataDto dataPartida, DataDto dataChegada, int lugaresEconomicos, int lugaresExecutivos, int lugaresPrimeiraClasse) {
+        this.nomeViagem=nomeViagem;
+        this.LugaresTotais = lugaresTotais;
+        this.companhia = companhia;
+        this.cidadeFinal = cidadeFinal;
+        this.cidadeInicial = cidadeInicial;
+        this.dataPartida = dataPartida;
+        this.dataChegada = dataChegada;
+        this.lugaresEconomicos = lugaresEconomicos;
+        this.lugaresExecutivos = lugaresExecutivos;
+        this.lugaresPrimeiraClasse = lugaresPrimeiraClasse;
     }
 
-    public void setNomeViagem(String nomeViagem) {
-        this.nomeViagem = nomeViagem;
-    }
-
-    public String getLugaresTotais() {
+    public int getLugaresTotais() {
         return LugaresTotais;
     }
-
-    public void setLugaresTotais(String lugaresTotais) {
-        LugaresTotais = lugaresTotais;
+    public Companhia getCompanhia() {
+        return companhia;
     }
-
-    public String getLugaresUsados() {
-        return LugaresUsados;
-    }
-
-    public void setLugaresUsados(String lugaresUsados) {
-        LugaresUsados = lugaresUsados;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
     public String getCidadeFinal() {
         return cidadeFinal;
     }
-
-    public void setCidadeFinal(String cidadeFinal) {
-        this.cidadeFinal = cidadeFinal;
-    }
-
     public String getCidadeInicial() {
         return cidadeInicial;
     }
-
-    public void setCidadeInicial(String cidadeInicial) {
-        this.cidadeInicial = cidadeInicial;
-    }
-
-    public String getDataPartida() {
+    public DataDto getDataPartida() {
         return dataPartida;
     }
-
-    public void setDataPartida(String dataPartida) {
-        this.dataPartida = dataPartida;
-    }
-
-    public String getDataChegada() {
+    public DataDto getDataChegada() {
         return dataChegada;
     }
-
-    public void setDataChegada(String dataChegada) {
-        this.dataChegada = dataChegada;
-    }
-
-    public String getLugaresEconomicos() {
+    public int getLugaresEconomicos() {
         return lugaresEconomicos;
     }
-
-    public void setLugaresEconomicos(String lugaresEconomicos) {
-        this.lugaresEconomicos = lugaresEconomicos;
-    }
-
-    public String getLugaresExecutivos() {
+    public int getLugaresExecutivos() {
         return lugaresExecutivos;
     }
-
-    public void setLugaresExecutivos(String lugaresExecutivos) {
-        this.lugaresExecutivos = lugaresExecutivos;
-    }
-
-    public String getLugaresPrimeiraClasse() {
+    public int getLugaresPrimeiraClasse() {
         return lugaresPrimeiraClasse;
-    }
-
-    public void setLugaresPrimeiraClasse(String lugaresPrimeiraClasse) {
-        this.lugaresPrimeiraClasse = lugaresPrimeiraClasse;
     }
 }

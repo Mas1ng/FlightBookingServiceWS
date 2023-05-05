@@ -30,6 +30,29 @@ public class ViagemList implements Serializable {
         return null;
     }
 
+    public Viagem getViagembyIndex(int i){
+        Viagem v = viagens.get(i);
+        return v;
+    }
+
+    public int sizeViagemList() {
+        int size=0;
+        for(Viagem viagem : viagens) {
+            size++;
+        }
+        return size;
+    }
+
+    public static boolean validarBilheteList(BilheteList item,ViagemList viagemList){
+        for(int i=0;i<item.sizeBilheteList();i++) {
+            for(int j=0;j<viagemList.sizeViagemList();j++){
+                if(item.getBilheteListIndex(i).getNomeViagem().equals(viagemList.getViagembyIndex(j).getNomeViagem()) && item.getBilheteListIndex(i).getNumLugar()==viagemList.getViagembyIndex(j).get){
+                    return true;
+                }
+            }
+        }return false;
+    }
+
     public ArrayList<Viagem> getAll() {
         ArrayList<Viagem> viagemList = new ArrayList<>();
         viagemList.addAll(this.viagens);
