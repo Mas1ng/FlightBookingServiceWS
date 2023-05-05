@@ -76,6 +76,11 @@ public class BilheteList implements Serializable {
         }
         return null;
     }
+
+    public Bilhete getNomeViagemByBilhete(int i) {
+        Bilhete b = getBilheteListIndex(i);
+        return b;
+    }
     public Bilhete getBilheteByNum(int numLugar){
         for (Bilhete bilhete : bilhetes)
         {
@@ -93,6 +98,16 @@ public class BilheteList implements Serializable {
             }
         }
         return bilhetesByNomeViagem;
+    }
+
+    public boolean removeBilheteListFromBilheteList(BilheteList bilheteList){
+        for(Bilhete b : bilhetes) {
+            for(int i=0;i<bilheteList.sizeBilheteList();i++) {
+                if(b.getNomeViagem().equals(bilheteList.getBilheteListIndex(i).getNomeViagem())){
+                    bilhetes.remove(b);
+                }
+            }
+        }
     }
     public BilheteList getBilheteListByNome(String nomeViagem) {
         BilheteList bilhetesByNomeViagem = new BilheteList();

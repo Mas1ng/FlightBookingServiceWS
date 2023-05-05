@@ -112,12 +112,9 @@ public class Mapper {
     }
 
     public static Viagem viagemDto2Viagem(ViagemDto arg){
-        try {
-            Data datap = dataDto2Data(arg.getDataPartida());
-            Data datac = dataDto2Data(arg.getDataChegada());
-            Viagem  obj = new Viagem(arg.getCompanhia(), arg.getLugaresTotais(), arg.getCidadeInicial(), arg.getCidadeInicial(), datap, datac, arg.getLugaresEconomicos(), arg.getLugaresExecutivos(), arg.getLugaresPrimeiraClasse());
-            return obj;
-        } catch (Exception e) {}
-
+        Data datap = dataDto2Data(arg.getDataPartida());
+        Data datac = dataDto2Data(arg.getDataChegada());
+        Viagem  obj = new Viagem(arg.getCompanhia(), arg.getLugaresTotais(), arg.getCidadeInicial(), arg.getCidadeInicial(), datap, datac, arg.getLugaresEconomicos(), arg.getLugaresExecutivos(), arg.getLugaresPrimeiraClasse());
+        return obj;
     }
 }

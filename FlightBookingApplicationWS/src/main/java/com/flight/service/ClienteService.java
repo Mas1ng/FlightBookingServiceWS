@@ -39,16 +39,26 @@ public class ClienteService {
         FilesOperation.storeFBS(fbs);
     }
     public static void updateClienteBilhetes(ClienteBilhetesDto arg){
+        FBS fbs = FilesOperation.loadFBS();
+        BilheteList bilheteList = new BilheteList();
         try {
-            FBS fbs = FilesOperation.loadFBS();
             BilheteList item = Mapper.clienteBilheteListDto2ClienteBilheteList(arg);
+            for(int i=0;i<item.sizeBilheteList();i++) {
+                Bilhete b = item.getNomeViagemByBilhete(i);
+                for(int j=0;j<fbs.getViagemList().sizeViagemList();j++) {
+                    if(b.getNomeViagem().equals(fbs.getViagemList().getViagembyIndex(j).getNomeViagem())) {
+                        bilheteList.addBilhete(b);
+                    } else { throw new Exception();}
+                }
+            }
+            for(int i=0;i<item.sizeBilheteList();i++) {
 
-            ViagemList viagemList=fbs.getViagemList();
-            if(ViagemList.validarBilheteList(item,viagemList)) {
-                fbs.getClienteList().updateBilhete(item, arg.getEmail());
-                FilesOperation.storeFBS(fbs);
-            }else {throw new Exception();}
+            }
         }catch (Exception e){}
+
+        fbs.getClienteList().updateBilhete(bilheteList, arg.getEmail());
+        fbs.getViagemList().getViagembyIndex(j).setBilhetesParaVender();
+        FilesOperation.storeFBS(fbs);
     }
     public static void removeCliente(String email){
         FBS fbs = FilesOperation.loadFBS();

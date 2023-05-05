@@ -25,35 +25,37 @@ public class Viagem implements Serializable {
     private String[] cidades_possiveis = new String [] {"Abu Dhabi","Abu Dhabi Bateen", "Dubai", "Algiers","Oran", "Amsterdam","Rotterdam", "Auckland","Christchurch", "Barcelona","Madrid", "Bogota","Barranquilla","Medellin", "Bordeaux","Paris", "Brussels","Charleroi", "Brisbane","Sydney", "Cairo","Luxor", "Sharm el-Sheikh", "Billund", "Copenhagen","Copenhagen Roskilde", "Dar es Salaam","Zanzibar", "Dubai","Sharjah", "Dublin","Cork","Dublin Weston", "Frankfurt","Munich", "Geneva","Bern", "Geneva","Geneva", "Guangzhou","Shenzhen", "Helsinki","Oulu", "Hong Kong","Macau", "Houston","Dallas", "Istanbul","Ankara", "Jakarta","Denpasar", "Johannesburg","Cape Town", "Johannesburg","Durban", "Kuala Lumpur","Kota Kinabalu", "Kuala Lumpur","Penang", "Kunming","Lijiang","Gdansk", "Krakow","Katowice", "Krakow","Poznan", "Krakow","Rzeszow", "Krakow","Warsaw", "Las Vegas","Los Angeles", "Lima","Cusco", "Lisboa","Porto", "London","Manchester", "Los Angeles","San Francisco", "Manila","Cebu", "Manila","Manila Ninoy Aquino", "Marrakesh","Casablanca", "Medellin","Bogota", "Mexico City","Cancun", "Milan","Bergamo", "Montreal","Toronto", "Moscow","Saint Petersburg", "Mumbai","New Delhi", "Munich","Düsseldorf", "New Delhi","Mumbai", "New York City","Los Angeles", "New York City","Newark", "Osaka","Osaka Itami", "Osaka","Tokyo", "Oslo","Bergen", "Palma de Mallorca","Barcelona", "Paris","Nice", "Paris","Paris", "Phnom Penh","Siem Reap", "Rome","Milan", "Santiago","Concepción", "Santiago","Easter Island", "Salzburg","Vienna", "San Francisco","Los Angeles", "São Paulo","Rio de Janeiro", "Seoul","Busan", "Seoul","Jeju", "Seoul","Seoul Gimpo", "Sharm el-Sheikh","Hurghada", "Shanghai","Beijing", "Stockholm","Gothenburg", "Sydney","Melbourne", "Taipei","Kaohsiung", "Taipei","Taipei Songshan", "Tallinn","Tartu", "Tel Aviv","Eilat", "Tehran","Mashhad", "Tehran","Tabriz", "Tokyo","Osaka", "Toulouse","Marseille", "Toulouse","Paris", "Toronto","Vancouver", "Vienna","Graz", "Vilnius","Kaunas", "Zagreb","Split", "Zurich","Basel", "Zurich","Geneva"};
 
     public Viagem(Companhia companhia, int lugaresTotais, String cidadeInicial, String cidadeFinal, Data dataPartida, Data dataChegada, int lugaresEconomicos, int lugaresExecutivos, int lugaresPrimeiraClasse) {
-        counter++;
-        this.counter=counter;
-        this.companhia=companhia;
-        if(lugaresTotais>50 && lugaresTotais<200) {
-            this.lugaresTotais = lugaresTotais;
-        } else {
-            //throw new numeroMaxLugaresInvalidos;
-            throw new Exception();
-        }
-        setCidadeFinal(cidadeFinal);
-        setCidadeInicial(cidadeInicial);
-        if(dataChegada.isGreaterThan(dataPartida)) {
-            this.dataPartida = dataPartida;
-            this.dataChegada = dataChegada;
-        } else {
-            //throw new datachegadaantesdataPartida
-            throw new Exception();
-        }
-        if(lugaresEconomicos>lugaresExecutivos && lugaresExecutivos>lugaresPrimeiraClasse && lugaresEconomicos+lugaresExecutivos+lugaresPrimeiraClasse==lugaresTotais) {
-            this.lugaresEconomicos = lugaresEconomicos;
-            this.lugaresExecutivos = lugaresExecutivos;
-            this.lugaresPrimeiraClasse = lugaresPrimeiraClasse;
-        } else {
-            //throw new lugaresInvalidos
-            throw new Exception();
-        }
-        this.nomeViagem = setNomeViagem(cidadeFinal,cidadeInicial,counter);
-        this.bilhetesTotais = new BilheteList(nomeViagem,lugaresTotais,lugaresEconomicos,lugaresExecutivos,lugaresPrimeiraClasse);
-        this.bilhetesParaVender =bilhetesTotais;
+        try {
+            counter++;
+            this.counter = counter;
+            this.companhia = companhia;
+            if (lugaresTotais > 50 && lugaresTotais < 200) {
+                this.lugaresTotais = lugaresTotais;
+            } else {
+                //throw new numeroMaxLugaresInvalidos;
+                throw new Exception();
+            }
+            setCidadeFinal(cidadeFinal);
+            setCidadeInicial(cidadeInicial);
+            if (dataChegada.isGreaterThan(dataPartida)) {
+                this.dataPartida = dataPartida;
+                this.dataChegada = dataChegada;
+            } else {
+                //throw new datachegadaantesdataPartida
+                throw new Exception();
+            }
+            if (lugaresEconomicos > lugaresExecutivos && lugaresExecutivos > lugaresPrimeiraClasse && lugaresEconomicos + lugaresExecutivos + lugaresPrimeiraClasse == lugaresTotais) {
+                this.lugaresEconomicos = lugaresEconomicos;
+                this.lugaresExecutivos = lugaresExecutivos;
+                this.lugaresPrimeiraClasse = lugaresPrimeiraClasse;
+            } else {
+                //throw new lugaresInvalidos
+                throw new Exception();
+            }
+            this.nomeViagem = setNomeViagem(cidadeFinal, cidadeInicial, counter);
+            this.bilhetesTotais = new BilheteList(nomeViagem, lugaresTotais, lugaresEconomicos, lugaresExecutivos, lugaresPrimeiraClasse);
+            this.bilhetesParaVender = bilhetesTotais;
+        }catch (Exception e) {}
     }
 
     public Viagem() {
@@ -79,19 +81,8 @@ public class Viagem implements Serializable {
         return nomeViagem;
     }
 
-
-
     public String getNomeViagem() {
         return nomeViagem;
-    }
-    public void setNomeViagem(String nomeViagem) {
-        this.nomeViagem = nomeViagem;
-    }
-    public BilheteList getSeats() {
-        return bilhetesTotais;
-    }
-    public void setSeats(BilheteList bilheteList) {
-        this.bilhetesTotais = bilheteList;
     }
     public int getLugaresTotais() {
         return lugaresTotais;
@@ -167,5 +158,21 @@ public class Viagem implements Serializable {
     }
     public void setCompanhia(Companhia companhia) {
         this.companhia = companhia;
+    }
+
+    public BilheteList getBilhetesTotais() {
+        return bilhetesTotais;
+    }
+
+    public void setBilhetesTotais(BilheteList bilhetesTotais) {
+        this.bilhetesTotais = bilhetesTotais;
+    }
+
+    public BilheteList getBilhetesParaVender() {
+        return bilhetesParaVender;
+    }
+
+    public void setBilhetesParaVender(BilheteList bilhetesParaVender) {
+        this.bilhetesParaVender = bilhetesParaVender;
     }
 }

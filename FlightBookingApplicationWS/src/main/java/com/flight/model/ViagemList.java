@@ -1,6 +1,7 @@
 package com.flight.model;
 
 import com.flight.exceptions.EmailInvalidException;
+import com.flight.exceptions.InvalidDataException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -70,6 +71,20 @@ public class ViagemList implements Serializable {
         }
     }
 
-    public void update() {
+    public void update(String nomeViagem, Companhia companhia, Data dataF, Data dataI, int lec, int lex, int lpc, int lt) {
+        Viagem viagem = getViagemByNomeViagem(nomeViagem);
+        if(viagem!=null)
+        {
+            viagem.setCompanhia(companhia);
+            viagem.setDataChegada(dataF);
+            viagem.setDataPartida(dataI);
+            viagem.setLugaresEconomicos(lec);
+            viagem.setLugaresExecutivos(lex);
+            viagem.setLugaresPrimeiraClasse(lpc);
+            viagem.setLugaresTotais(lt);
+        }else{
+            String msg = "A viagem: " + nomeViagem+" não existe!!";
+            throw  new InvalidDataException(msg);
+        }
     }
 }
