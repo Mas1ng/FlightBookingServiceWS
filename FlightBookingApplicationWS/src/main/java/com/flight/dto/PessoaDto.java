@@ -5,30 +5,23 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 
-@JsonPropertyOrder({"email","nome","data"})
+@JsonPropertyOrder({"nome","data","cc"})
 @JacksonXmlRootElement(localName="pessoas")
 public class PessoaDto {
-
-    @JacksonXmlProperty(localName = "email")
-    private String email;
-
     @JacksonXmlProperty(localName = "nome")
     private String nome;
 
     @JacksonXmlProperty(localName = "data")
     private DataDto data;
+    @JacksonXmlProperty(localName = "cc")
+    private long cc;
 
-    public PessoaDto(String email, String nome, DataDto data) {
-        this.email = email;
+    public PessoaDto(String nome, DataDto data, long cc) {
         this.nome = nome;
         this.data = data;
+        this.cc = cc;
     }
-
     public PessoaDto() {
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getNome() {
@@ -37,5 +30,21 @@ public class PessoaDto {
 
     public DataDto getData() {
         return data;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setData(DataDto data) {
+        this.data = data;
+    }
+
+    public long getCc() {
+        return cc;
+    }
+
+    public void setCc(long cc) {
+        this.cc = cc;
     }
 }

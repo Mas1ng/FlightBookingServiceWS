@@ -91,7 +91,7 @@ public class Data implements Serializable {
         if(this.mes > obj.mes){
             return true;
         }
-        if(this.dia > obj.dia){
+        if(this.dia == obj.dia){
             return true;
         }
         return false;

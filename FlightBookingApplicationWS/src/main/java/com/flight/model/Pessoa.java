@@ -31,6 +31,12 @@ public class Pessoa implements Serializable {
         setCc(cc);
     }
 
+    public Pessoa(String nome, Data data,long cc){
+        setNome(nome);
+        setData(data);
+        setCc(cc);
+    }
+
     public String getNome(){
         return this.nome;
     }

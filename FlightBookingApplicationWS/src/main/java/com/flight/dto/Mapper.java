@@ -98,8 +98,23 @@ public class Mapper {
         return obj;
     }
 
+    public static HorarioDto horario2HorarioDto(Horario arg){
+        if (arg == null) {
+            return null;
+        }
+        int [] hm = {0,0};
+        arg.getHorario(hm);
+        HorarioDto  obj = new HorarioDto(hm[0],hm[1]);
+        return obj;
+    }
+
     public static Data dataDto2Data(DataDto arg){
         Data  obj = new Data(arg.getDia(),arg.getMes(),arg.getAno());
+        return obj;
+    }
+
+    public static Horario horarioDto2Horario(HorarioDto arg){
+        Horario obj = new Horario(arg.getHora(),arg.getMinuto());
         return obj;
     }
 
@@ -157,14 +172,57 @@ public class Mapper {
     public static ViagemDto viagem2ViagemDto(Viagem args){
         DataDto datapDto = data2DataDto(args.getDataPartida());
         DataDto datacDto = data2DataDto(args.getDataChegada());
-        ViagemDto obj = new ViagemDto(args.getNomeViagem(), args.getLugaresTotais(), args.getCompanhia(), args.getCidadeInicial(), args.getCidadeFinal(),datapDto,datacDto,args.getLugaresEconomicos(),args.getLugaresExecutivos(),args.getLugaresPrimeiraClasse());
+        HorarioDto horariopDto = horario2HorarioDto(args.getHoraPartida());
+        HorarioDto horariocDto = horario2HorarioDto(args.getHoraChegada());
+        ViagemDto obj = new ViagemDto(args.getNomeViagem(), args.getLugaresTotais(), args.getCompanhia(), args.getCidadeInicial(), args.getCidadeFinal(),datapDto,datacDto,horariopDto,horariocDto,args.getLugaresEconomicos(),args.getLugaresExecutivos(),args.getLugaresPrimeiraClasse());
         return obj;
     }
 
     public static Viagem viagemDto2Viagem(ViagemDto arg){
         Data datap = dataDto2Data(arg.getDataPartida());
         Data datac = dataDto2Data(arg.getDataChegada());
-        Viagem  obj = new Viagem(arg.getCompanhia(), arg.getLugaresTotais(), arg.getCidadeInicial(), arg.getCidadeFinal(), datap, datac, arg.getLugaresEconomicos(), arg.getLugaresExecutivos(), arg.getLugaresPrimeiraClasse());
+        Horario horariop = horarioDto2Horario(arg.getHorarioPartida());
+        Horario horarioc = horarioDto2Horario(arg.getHorarioChegada());
+        Viagem  obj = new Viagem(arg.getCompanhia(), arg.getLugaresTotais(), arg.getCidadeInicial(), arg.getCidadeFinal(), datap, datac, horariop,horarioc,arg.getLugaresEconomicos(), arg.getLugaresExecutivos(), arg.getLugaresPrimeiraClasse());
         return obj;
+    }
+
+    public static CriticaDto critica2CriticaDto (Critica c){
+        DataDto dataDto = data2DataDto(c.getDatacritica());
+        CriticaDto obj = new CriticaDto(c.getEmailCliente(), dataDto, c.getAvaliação(),c.getTextocritica(), c.getAssunto(), c.getViagem());
+        return obj;
+    }
+    public static CriticaListDto criticaList2CriticaListDto(ArrayList<Critica>arg){
+        ArrayList<CriticaDto> lista = new ArrayList<>();
+        for(Critica critica : arg){
+            CriticaDto item = critica2CriticaDto(critica);
+            lista.add(item);
+        }
+        CriticaListDto obj = new CriticaListDto(lista);
+        return obj;
+    }
+    public static Critica criticaDto2Critica(CriticaDto c){
+        Data datac= dataDto2Data(c.getDatacritica());
+        Critica obj = new Critica(c.getEmailCliente(), datac, c.getAvaliacao(), c.getTextocritica(), c.getAssunto(), c.getNomeViagem());
+        return obj;
+    }
+    public static PessoaDto pessoa2PessoaDto(Pessoa p){
+        DataDto dataDto = data2DataDto(p.getData());
+        PessoaDto obj = new PessoaDto(p.getNome(), dataDto, p.getCc());
+        return obj;
+    }
+    public static PessoaListDto pessoaList2PessoaListDto(ArrayList<Pessoa> lista){
+        ArrayList<PessoaDto> list = new ArrayList<>();
+        for(Pessoa pessoa : lista){
+            PessoaDto item = pessoa2PessoaDto(pessoa);
+            list.add(item);
+        }
+        PessoaListDto obj = new PessoaListDto(list);
+        return obj;
+    }
+    public static Pessoa pessoaDto2Pessoa (PessoaDto arg){
+        Data data = dataDto2Data(arg.getData());
+        Pessoa p = new Pessoa(arg.getNome(), data,arg.getCc());
+        return p;
     }
 }

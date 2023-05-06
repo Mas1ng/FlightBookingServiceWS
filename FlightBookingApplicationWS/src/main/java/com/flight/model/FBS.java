@@ -9,7 +9,8 @@ public class FBS implements Serializable {
     private ClienteList clienteList;
     private BilheteList bilheteList;
     private ViagemList viagemList;
-    private ArrayList<Pessoa> pessoaList;
+    private PessoaList pessoaList;
+    private CriticaList criticaList;
 
     private void setDataForConsistency() {
         //this.bilheteList.
@@ -20,7 +21,8 @@ public class FBS implements Serializable {
         this.bilheteList= new BilheteList();
         this.clienteList=new ClienteList();
         this.viagemList = new ViagemList();
-        this.pessoaList = new ArrayList<>();
+        this.pessoaList = new PessoaList();
+        this.criticaList= new CriticaList();
         setDataForConsistency();
     }
 
@@ -40,7 +42,11 @@ public class FBS implements Serializable {
         return viagemList;
     }
 
-    public ArrayList<Pessoa> getPessoaList() {
+    public PessoaList getPessoaList() {
         return pessoaList;
+    }
+
+    public CriticaList getCriticaList() {
+        return criticaList;
     }
 }

@@ -84,4 +84,15 @@ public class ViagemList implements Serializable {
             throw  new InvalidDataException(msg);
         }
     }
+
+    public Viagem get(String nomeViagem)
+    {
+        Viagem viagem = getViagemByNomeViagem(nomeViagem);
+        if(viagem != null){
+            return viagem;
+        }else{
+            String msg = "Viagem: " + viagem+ " does not exist!!";
+            throw  new InvalidDataException(msg);
+        }
+    }
 }

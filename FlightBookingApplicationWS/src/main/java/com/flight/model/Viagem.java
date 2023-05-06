@@ -20,13 +20,17 @@ public class Viagem implements Serializable {
     Data dataPartida;
     Data dataChegada;
 
+    Horario horaPartida;
+
+    Horario horaChegada;
+
     int lugaresEconomicos;
     int lugaresExecutivos;
     int lugaresPrimeiraClasse;
 
     private String[] cidades_possiveis = new String [] {"Portugal","Vienna", "Salzburg", "Baku", "Ganja", "Minsk", "Gomel", "Brussels", "Antwerp", "Sarajevo", "Banja Luka", "Sofia", "Varna", "Zagreb", "Split", "Nicosia", "Larnaca", "Prague", "Brno", "Copenhagen", "Billund", "Tallinn", "Tartu", "Helsinki", "Turku", "Bordeaux", "Nice", "Berlin", "Munich", "Athens", "Thessaloniki", "Budapest", "Debrecen", "Reykjavik", "Keflavik", "Dublin", "Cork", "Rome", "Milan", "Pristina", "Përnambuc", "Riga", "Liepāja", "Vilnius", "Kaunas", "Luxembourg City", "Esch-sur-Alzette", "Valletta", "Gozo", "Chisinau", "Bălți", "Monaco", "Monte Carlo", "Podgorica", "Tivat", "Amsterdam", "Rotterdam", "Oslo", "Bergen", "Kraków", "Warsaw", "Lisboa", "Porto", "Bucharest", "Cluj-Napoca", "Moscow", "St. Petersburg", "Belgrade", "Niš", "Bratislava", "Košice", "Ljubljana", "Maribor", "Madrid", "Barcelona", "Stockholm", "Gothenburg", "Bern", "Zurich", "Istanbul", "Ankara", "Kyiv", "Lviv", "Liverpool", "Manchester", "London", "Manchester", "Zagreb", "Split", "Paris", "Nice", "Athens", "Thessaloniki"};
 
-    public Viagem(Companhia companhia, int lugaresTotais, String cidadeInicial, String cidadeFinal, Data dataPartida, Data dataChegada, int lugaresEconomicos, int lugaresExecutivos, int lugaresPrimeiraClasse) {
+    public Viagem(Companhia companhia, int lugaresTotais, String cidadeInicial, String cidadeFinal, Data dataPartida, Data dataChegada, Horario horaPartida,Horario horaChegada, int lugaresEconomicos, int lugaresExecutivos, int lugaresPrimeiraClasse) {
         try {
             counter++;
             counterNum= counter;
@@ -48,6 +52,18 @@ public class Viagem implements Serializable {
                 //throw new datachegadaantesdataPartida
                 throw new Exception();
             }
+            if(Horario.eValidaHora(horaPartida.getHora(), horaPartida.getMinuto()) && Horario.eValidaHora(horaChegada.getHora(), horaChegada.getMinuto())){
+                setHoraPartida(horaPartida);
+                setHoraChegada(horaChegada);
+            }
+            if (horaChegada.isGreaterThan(horaPartida)) {
+                this.horaPartida = horaPartida;
+                this.horaChegada = horaChegada;
+            } else {
+                //throw new datachegadaantesdataPartida
+                throw new Exception();
+            }
+
             if (lugaresEconomicos > lugaresExecutivos && lugaresExecutivos > lugaresPrimeiraClasse && lugaresEconomicos + lugaresExecutivos + lugaresPrimeiraClasse == lugaresTotais) {
                 this.lugaresEconomicos = lugaresEconomicos;
                 this.lugaresExecutivos = lugaresExecutivos;
@@ -182,5 +198,21 @@ public class Viagem implements Serializable {
 
     public void setBilhetesVendidos(BilheteList bilhetesVendidos) {
         this.bilhetesVendidos = bilhetesVendidos;
+    }
+
+    public Horario getHoraPartida() {
+        return horaPartida;
+    }
+
+    public void setHoraPartida(Horario horaPartida) {
+        this.horaPartida = horaPartida;
+    }
+
+    public Horario getHoraChegada() {
+        return horaChegada;
+    }
+
+    public void setHoraChegada(Horario horaChegada) {
+        this.horaChegada = horaChegada;
     }
 }

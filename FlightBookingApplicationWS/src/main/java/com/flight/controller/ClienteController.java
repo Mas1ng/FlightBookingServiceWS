@@ -36,7 +36,7 @@ public class ClienteController {
     public ResponseEntity<Object> addCliente(@RequestBody ClienteDto arg) {
         try {
             ClienteService.addCliente(arg);
-            return new ResponseEntity<>("O cliente "+arg.getEmail()+" foi criado",HttpStatus.CREATED);
+            return new ResponseEntity<>("Sucesso: O cliente "+arg.getEmail()+" foi criado",HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorDto(e.getMessage()), HttpStatus.CONFLICT);
         }
