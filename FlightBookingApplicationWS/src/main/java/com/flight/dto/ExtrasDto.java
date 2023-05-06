@@ -5,14 +5,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.flight.model.Mala;
 
-@JsonPropertyOrder({"preco","tipoLugar","seguro","comida","mala"})
+@JsonPropertyOrder({"seguro","comida","mala"})
 @JacksonXmlRootElement(localName = "extras")
 public class ExtrasDto {
-
-    @JacksonXmlProperty(localName="preco")
-    private int preco;
-    @JacksonXmlProperty(localName="tipoLugar")
-    private String tipoLugar;
     @JacksonXmlProperty(localName="seguro")
     private boolean seguro;
     @JacksonXmlProperty(localName="comida")
@@ -23,20 +18,10 @@ public class ExtrasDto {
     public ExtrasDto() {
     }
 
-    public ExtrasDto(int preco, String tipoLugar, boolean seguro, boolean comida, Mala mala) {
-        this.preco = preco;
-        this.tipoLugar = tipoLugar;
+    public ExtrasDto(boolean seguro, boolean comida, Mala mala) {
         this.seguro = seguro;
         this.comida = comida;
         this.mala = mala;
-    }
-
-    public int getPreco() {
-        return preco;
-    }
-
-    public String getTipoLugar() {
-        return tipoLugar;
     }
 
     public boolean isSeguro() {

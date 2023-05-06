@@ -1,8 +1,6 @@
 package com.flight.controller;
 
-import com.flight.dto.BilheteDto;
-import com.flight.dto.BilheteListDto;
-import com.flight.dto.ErrorDto;
+import com.flight.dto.*;
 import com.flight.service.BilheteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,56 +10,55 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 public class BilheteController {
-   @GetMapping(value = "/bilhetes" , produces = MediaType.APPLICATION_XML_VALUE)
-        public ResponseEntity<Object> getBilhetes(){
+    @GetMapping(value = "/bilhetes" , produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<Object> getBilhetes(){
         try{
-            BilheteListDto result = BilheteService.getBilhetes();
+            ClientesBilhetesNumLugarDto result = BilheteService.getAllBilhetes();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>(new ErrorDto(e.getMessage()), HttpStatus.CONFLICT);
+
+        }
+    }
+   @GetMapping(value = "/bilhetes/{email}" , produces = MediaType.APPLICATION_XML_VALUE)
+        public ResponseEntity<Object> getBilhetes(@PathVariable("email") String email){
+        try{
+            BilheteListNumLugarDto result = BilheteService.getBilhetesFromCliente(email);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>(new ErrorDto(e.getMessage()), HttpStatus.CONFLICT);
 
         }
    }
-    @GetMapping(value = "/bilhetes/{nomeViagem}",
-            produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<Object> getStudent(@PathVariable("nomeViagem") String nomeViagem, @RequestBody int numlugar) {
-        try {
-            BilheteDto result = BilheteService.getBilhete(nomeViagem, numlugar);
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new ErrorDto(e.getMessage()), HttpStatus.CONFLICT);
-        }
-    }
-
     @PostMapping(value = "/bilhetes",
             consumes = MediaType.APPLICATION_XML_VALUE,
             produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<Object> addBilhete(@RequestBody BilheteDto arg) {
+    public ResponseEntity<Object> addBilhete(@RequestBody ClienteBilhetesDto arg) {
         try {
-            BilheteService.addBilhete(arg);
+            BilheteService.addBilheteListToCliente(arg);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorDto(e.getMessage()), HttpStatus.CONFLICT);
         }
     }
 
-    @PutMapping(value = "/bilhetes/{viagem}",
+    /*@PutMapping(value = "/bilhetes/{viagem}",
             consumes = MediaType.APPLICATION_XML_VALUE,
             produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<Object> updateStudent(@PathVariable("nomeViagem")String nomeViagem, @RequestBody int numlugar, BilheteDto arg) {
         try {
-            BilheteService.updateBilhete(nomeViagem, numlugar, arg);
+            BilheteService.update(nomeViagem, numlugar, arg);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorDto(e.getMessage()), HttpStatus.CONFLICT);
         }
-    }
+    }*/
 
-    @DeleteMapping(value = "/bilhetes/{bilhete}",
+    @DeleteMapping(value = "/bilhetes/{email}",
             produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<Object> removeStudent(@PathVariable("nomeViagem")String nomeViagem, @RequestBody int numlugar) {
+    public ResponseEntity<Object> removeStudent(@PathVariable("email")String email, @RequestBody NumLugarNomeViagemDto arg) {
         try {
-            BilheteService.removeBilhete(nomeViagem, numlugar);
+            BilheteService.removeBilhete(email, arg);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorDto(e.getMessage()), HttpStatus.CONFLICT);

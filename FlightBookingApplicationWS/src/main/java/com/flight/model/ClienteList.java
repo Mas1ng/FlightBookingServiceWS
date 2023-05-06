@@ -1,8 +1,7 @@
 package com.flight.model;
 
 import com.flight.exceptions.ClienteDuplicadoException;
-import com.flight.exceptions.EmailInvalidException;
-import com.flight.exceptions.InvalidDataException;
+import com.flight.exceptions.InvalidException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +18,8 @@ public class ClienteList implements Serializable {
         if (c == null) {
             clientes.add(cliente);
         } else {
-            throw new ClienteDuplicadoException(cliente.getEmail());
+            String msg = "Um cliente com o email "+cliente.getEmail()+" ja foi criado";
+            throw new ClienteDuplicadoException(msg);
         }
     }
 
@@ -29,8 +29,7 @@ public class ClienteList implements Serializable {
             if(cliente.getEmail().equals(email)){
                 return cliente;
             }
-        }
-        return null;
+        }return null;
     }
 
     public ArrayList<Cliente> getAll() {
@@ -39,14 +38,12 @@ public class ClienteList implements Serializable {
         return clienteList;
     }
 
-    public void remove(String email) {
-        for(Cliente cliente : clientes) {
-            if(cliente.getEmail().equals(email)) {
-                clientes.remove(cliente);
-            } else {
-                String msg= "O email \"" + email + "\"não esta associado a nenhum cliente";
-                throw new EmailInvalidException(msg);
-            }
+    public void remove(Cliente c) {
+        if(c!=null) {
+            clientes.remove(c);
+        } else {
+            String msg= "O c \"" + c.getEmail() + "\"não esta associado a nenhum cliente";
+            throw new InvalidException(msg);
         }
     }
 
@@ -58,7 +55,7 @@ public class ClienteList implements Serializable {
             cliente.setNome(nomeNovo);
         } else {
             String msg= "O email \"" + emailAntigo + "\"não esta associado a nenhum cliente";
-            throw new EmailInvalidException(msg);
+            throw new InvalidException(msg);
         }
     }
     public void updateBilhete(BilheteList b, String email) {
@@ -71,7 +68,7 @@ public class ClienteList implements Serializable {
             }
         } else {
             String msg= "O email \"" + email + "\"não esta associado a nenhum cliente";
-            throw new EmailInvalidException(msg);
+            throw new InvalidException(msg);
         }
     }
 }

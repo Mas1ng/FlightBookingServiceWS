@@ -38,7 +38,7 @@ public class ClienteService {
         fbs.getClienteList().update(email, arg.getNome(),data,arg.getEmail());
         FilesOperation.storeFBS(fbs);
     }
-    public static void updateClienteBilhetes(ClienteBilhetesDto arg){
+    /*public static void updateClienteBilhetes(ClienteBilhetesDto arg){
         FBS fbs = FilesOperation.loadFBS();
         BilheteList bilheteList = new BilheteList();
         try {
@@ -55,14 +55,17 @@ public class ClienteService {
 
             }
         }catch (Exception e){}
-
         fbs.getClienteList().updateBilhete(bilheteList, arg.getEmail());
+        for(int z=0;z<fbs.getViagemList().sizeViagemList();z++) {
+
+        }
         fbs.getViagemList().getViagembyIndex(j).setBilhetesParaVender();
         FilesOperation.storeFBS(fbs);
-    }
+    }*/
     public static void removeCliente(String email){
         FBS fbs = FilesOperation.loadFBS();
-        fbs.getClienteList().remove(email);
+        Cliente c = fbs.getClienteList().getClienteByEmail(email);
+        fbs.getClienteList().remove(c);
         FilesOperation.storeFBS(fbs);
     }
 }

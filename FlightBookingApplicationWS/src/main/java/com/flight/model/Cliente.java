@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class Cliente extends Pessoa implements Serializable {
     private BilheteList bilheteList;
 
-    public Cliente(String email, String nome, Data data, BilheteList bilheteList) {
-        super(email, nome, data);
+    public Cliente(String email, String nome, Data data, long cc, BilheteList bilheteList) {
+        super(email, nome, data,cc);
         this.bilheteList = bilheteList;
     }
-    public Cliente(String email, String nome, Data data) {
-        super(email, nome, data);
+    public Cliente(String email, String nome, Data data, long cc) {
+        super(email, nome, data,cc);
         this.bilheteList = new BilheteList();
     }
 
@@ -22,4 +22,5 @@ public class Cliente extends Pessoa implements Serializable {
     public void setBilhetes(BilheteList bilheteList) {
         this.bilheteList = bilheteList;
     }
+
 }

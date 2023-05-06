@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/fbs")
+@RequestMapping("/api")
 public class ViagemController {
     @GetMapping(value = "/viagens" , produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<Object> getViagens(){
@@ -22,7 +22,7 @@ public class ViagemController {
 
         }
     }
-    @GetMapping(value = "/viagem/{nomeViagem}",
+    @GetMapping(value = "/viagens/{nomeViagem}",
             produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<Object> getViagem(@PathVariable("nomeViagem") String nomeViagem) {
         try {
@@ -45,7 +45,7 @@ public class ViagemController {
         }
     }
 
-    @PutMapping(value = "/viagem/{viagem}",
+    @PutMapping(value = "/viagens/{nomeViagem}",
             consumes = MediaType.APPLICATION_XML_VALUE,
             produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<Object> updateStudent(@PathVariable("nomeViagem")String nomeViagem, @RequestBody ViagemDto arg) {
@@ -57,7 +57,7 @@ public class ViagemController {
         }
     }
 
-    @DeleteMapping(value = "/Viagem/{viagem}",
+    @DeleteMapping(value = "/viagens/{nomeViagem}",
             produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<Object> removeViagem(@PathVariable("nomeViagem")String nomeViagem) {
         try {

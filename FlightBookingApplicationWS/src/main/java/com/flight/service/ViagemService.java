@@ -33,13 +33,14 @@ public class ViagemService {
         FBS fbs = FilesOperation.loadFBS();
         Data dataChegada = Mapper.dataDto2Data(arg.getDataChegada());
         Data dataPartida = Mapper.dataDto2Data(arg.getDataPartida());
-        fbs.getViagemList().update(nomeViagem, arg.getCompanhia(), dataChegada, dataPartida, arg.getLugaresEconomicos(), arg.getLugaresExecutivos(), arg.getLugaresPrimeiraClasse(), arg.getLugaresTotais());
+        fbs.getViagemList().update(nomeViagem, arg.getCompanhia(), dataChegada, dataPartida);
         FilesOperation.storeFBS(fbs);
     }
     public static void removeViagem (String nomeViagem)
     {
         FBS fbs = FilesOperation.loadFBS();
-        fbs.getViagemList().remove(nomeViagem);
+        Viagem v = fbs.getViagemList().getViagemByNomeViagem(nomeViagem);
+        fbs.getViagemList().remove(v);
         FilesOperation.storeFBS(fbs);
     }
 }

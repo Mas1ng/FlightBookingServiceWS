@@ -6,12 +6,12 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.flight.model.Companhia;
 
 
-@JsonPropertyOrder({"nomeViagem","lugaresTotais", "companhia", "cidadeInicial","cidadeFinal", "dataPartida", "dataChegada", "lugaresEconomicos", "lugaresExecutivos", "lugaresPrimeiraClasse"} )
+@JsonPropertyOrder({"lugaresTotais", "companhia", "cidadeInicial","cidadeFinal", "dataPartida", "dataChegada", "lugaresEconomicos", "lugaresExecutivos", "lugaresPrimeiraClasse"} )
 @JacksonXmlRootElement(localName = "viagem")
 public class ViagemDto {
     @JacksonXmlProperty(localName = "nomeViagem")
     private String nomeViagem;
-    @JacksonXmlProperty(localName = "LugaresTotais")
+    @JacksonXmlProperty(localName = "lugaresTotais")
     private int LugaresTotais;
     @JacksonXmlProperty(localName = "companhia")
     private Companhia companhia;
@@ -33,16 +33,10 @@ public class ViagemDto {
     public ViagemDto() {
     }
 
-    public ViagemDto(int lugaresTotais, Companhia companhia, String cidadeInicial, String cidadeFinal, DataDto dataPartida, DataDto dataChegada, int lugaresEconomicos, int lugaresExecutivos, int lugaresPrimeiraClasse) {
-        this.LugaresTotais = lugaresTotais;
+    public ViagemDto(Companhia companhia, DataDto dataPartida, DataDto dataChegada) {
         this.companhia = companhia;
-        this.cidadeFinal = cidadeFinal;
-        this.cidadeInicial = cidadeInicial;
         this.dataPartida = dataPartida;
         this.dataChegada = dataChegada;
-        this.lugaresEconomicos = lugaresEconomicos;
-        this.lugaresExecutivos = lugaresExecutivos;
-        this.lugaresPrimeiraClasse = lugaresPrimeiraClasse;
     }
 
     public ViagemDto(String nomeViagem, int lugaresTotais, Companhia companhia, String cidadeInicial, String cidadeFinal, DataDto dataPartida, DataDto dataChegada, int lugaresEconomicos, int lugaresExecutivos, int lugaresPrimeiraClasse) {

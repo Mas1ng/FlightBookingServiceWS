@@ -36,7 +36,7 @@ public class ClienteController {
     public ResponseEntity<Object> addCliente(@RequestBody ClienteDto arg) {
         try {
             ClienteService.addCliente(arg);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>("O cliente "+arg.getEmail()+" foi criado",HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorDto(e.getMessage()), HttpStatus.CONFLICT);
         }
@@ -57,7 +57,7 @@ public class ClienteController {
             produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<Object> updateCliente(@RequestBody ClienteBilhetesDto arg) {
         try {
-            ClienteService.updateClienteBilhetes(arg);
+            //ClienteService.updateClienteBilhetes(arg);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorDto(e.getMessage()), HttpStatus.CONFLICT);

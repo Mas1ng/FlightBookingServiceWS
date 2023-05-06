@@ -1,5 +1,5 @@
 package com.flight.model;
-import com.flight.exceptions.EmailInvalidException;
+import com.flight.exceptions.InvalidException;
 import com.flight.exceptions.InvalidDataException;
 
 import java.io.Serializable;
@@ -10,21 +10,25 @@ public class Pessoa implements Serializable {
     private String nome;
     private Data data;
     private String email;
+    private long cc;
     private boolean isNameValid(String name){
         if(name.length() < 3){
             return false;
         }
         return true;
     }
-    public Pessoa(String email, String nome, Data data){
+
+    private boolean isCcValid(long cc){
+        if(cc < 100000000 || cc > 999999999){
+            return false;
+        }
+        return true;
+    }
+    public Pessoa(String email, String nome, Data data,long cc){
         setEmail(email);
         setNome(nome);
         setData(data);
-    }
-
-    public Pessoa(String nome, Data data) {
-        this.nome = nome;
-        this.data = data;
+        setCc(cc);
     }
 
     public String getNome(){
@@ -52,14 +56,12 @@ public class Pessoa implements Serializable {
     }
 
     public void setEmail(String email) {
-        try {
-            if (validateEmail(email)) {
-                this.email = email;
-            } else {
-                String msg = "Email invalido";
-                throw new EmailInvalidException(msg);
-            }
-        }catch (EmailInvalidException e) {}
+        if (validateEmail(email)) {
+            this.email = email;
+        } else {
+            String msg = "Email invalido";
+            throw new InvalidException(msg);
+        }
     }
 
     public boolean validateEmail(String email){
@@ -68,5 +70,19 @@ public class Pessoa implements Serializable {
         Pattern emailPat = Pattern.compile(regex,Pattern.CASE_INSENSITIVE);
         Matcher matcher = emailPat.matcher(email);
         return matcher.find();
+    }
+
+    public long getCc() {
+        return cc;
+    }
+
+    public void setCc(long cc) {
+        if(isCcValid(cc)) {
+            this.cc=cc;
+        }
+        else {
+            String msg = "Numero cc invalido";
+            throw new InvalidException(msg);
+        }
     }
 }

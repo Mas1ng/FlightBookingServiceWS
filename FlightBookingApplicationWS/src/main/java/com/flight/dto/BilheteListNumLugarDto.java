@@ -7,17 +7,16 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 
 @JacksonXmlRootElement(localName="bilhetes")
-public class BilheteListDto {
-
+public class BilheteListNumLugarDto {
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "bilhete")
-    private ArrayList<BilheteDto> bilhetes;
+    private ArrayList<BilheteNumLugarDto> bilhetes;
 
-    public BilheteListDto(ArrayList<BilheteDto> bilhetes) {
+    public BilheteListNumLugarDto(ArrayList<BilheteNumLugarDto> bilhetes) {
         this.bilhetes = bilhetes;
     }
 
-    public ArrayList<BilheteDto> getBilhetes() {
+    public ArrayList<BilheteNumLugarDto> getBilhetes() {
         return bilhetes;
     }
 }

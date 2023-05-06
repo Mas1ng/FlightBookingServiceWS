@@ -11,6 +11,7 @@ public class MockData {
 
     private String[] nome_cliente ={"Joao Jose","Jose Joao"};
     private String[] nome_email = {"joaojose@gmai.com","josejoao@gmail.com"};
+    private long[] cc = {123454321,987656789};
 
     private Data genDate(){
         Random gen = new Random(System.currentTimeMillis());
@@ -25,7 +26,7 @@ public class MockData {
     private void  insertClientes(ClienteList container){
         for (int i = 0; i < nome_cliente.length;i++){
             Data dt = genDate();
-            Cliente obj = new Cliente(nome_email[i],nome_cliente[i],dt);
+            Cliente obj = new Cliente(nome_email[i],nome_cliente[i],dt,cc[i]);
             container.addCliente(obj);
         }
     }

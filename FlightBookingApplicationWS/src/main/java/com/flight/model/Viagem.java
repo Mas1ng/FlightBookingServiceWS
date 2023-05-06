@@ -3,15 +3,17 @@ package com.flight.model;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import static com.flight.model.TipoBilhete.ECONOMICO;
+import static com.flight.model.TipoBilhete.EXECUTIVO;
+
 public class Viagem implements Serializable {
-    private int counter=0;
+    private static int counter=0;
+    private int counterNum;
     private String nomeViagem;
-    BilheteList bilhetesTotais;
     BilheteList bilhetesParaVender;
+    BilheteList bilhetesVendidos;
     Companhia companhia;
     int lugaresTotais;
-    int lugaresUsados;
-
     String cidadeFinal;
     String cidadeInicial;
 
@@ -22,19 +24,21 @@ public class Viagem implements Serializable {
     int lugaresExecutivos;
     int lugaresPrimeiraClasse;
 
-    private String[] cidades_possiveis = new String [] {"Abu Dhabi","Abu Dhabi Bateen", "Dubai", "Algiers","Oran", "Amsterdam","Rotterdam", "Auckland","Christchurch", "Barcelona","Madrid", "Bogota","Barranquilla","Medellin", "Bordeaux","Paris", "Brussels","Charleroi", "Brisbane","Sydney", "Cairo","Luxor", "Sharm el-Sheikh", "Billund", "Copenhagen","Copenhagen Roskilde", "Dar es Salaam","Zanzibar", "Dubai","Sharjah", "Dublin","Cork","Dublin Weston", "Frankfurt","Munich", "Geneva","Bern", "Geneva","Geneva", "Guangzhou","Shenzhen", "Helsinki","Oulu", "Hong Kong","Macau", "Houston","Dallas", "Istanbul","Ankara", "Jakarta","Denpasar", "Johannesburg","Cape Town", "Johannesburg","Durban", "Kuala Lumpur","Kota Kinabalu", "Kuala Lumpur","Penang", "Kunming","Lijiang","Gdansk", "Krakow","Katowice", "Krakow","Poznan", "Krakow","Rzeszow", "Krakow","Warsaw", "Las Vegas","Los Angeles", "Lima","Cusco", "Lisboa","Porto", "London","Manchester", "Los Angeles","San Francisco", "Manila","Cebu", "Manila","Manila Ninoy Aquino", "Marrakesh","Casablanca", "Medellin","Bogota", "Mexico City","Cancun", "Milan","Bergamo", "Montreal","Toronto", "Moscow","Saint Petersburg", "Mumbai","New Delhi", "Munich","Düsseldorf", "New Delhi","Mumbai", "New York City","Los Angeles", "New York City","Newark", "Osaka","Osaka Itami", "Osaka","Tokyo", "Oslo","Bergen", "Palma de Mallorca","Barcelona", "Paris","Nice", "Paris","Paris", "Phnom Penh","Siem Reap", "Rome","Milan", "Santiago","Concepción", "Santiago","Easter Island", "Salzburg","Vienna", "San Francisco","Los Angeles", "São Paulo","Rio de Janeiro", "Seoul","Busan", "Seoul","Jeju", "Seoul","Seoul Gimpo", "Sharm el-Sheikh","Hurghada", "Shanghai","Beijing", "Stockholm","Gothenburg", "Sydney","Melbourne", "Taipei","Kaohsiung", "Taipei","Taipei Songshan", "Tallinn","Tartu", "Tel Aviv","Eilat", "Tehran","Mashhad", "Tehran","Tabriz", "Tokyo","Osaka", "Toulouse","Marseille", "Toulouse","Paris", "Toronto","Vancouver", "Vienna","Graz", "Vilnius","Kaunas", "Zagreb","Split", "Zurich","Basel", "Zurich","Geneva"};
+    private String[] cidades_possiveis = new String [] {"Portugal","Vienna", "Salzburg", "Baku", "Ganja", "Minsk", "Gomel", "Brussels", "Antwerp", "Sarajevo", "Banja Luka", "Sofia", "Varna", "Zagreb", "Split", "Nicosia", "Larnaca", "Prague", "Brno", "Copenhagen", "Billund", "Tallinn", "Tartu", "Helsinki", "Turku", "Bordeaux", "Nice", "Berlin", "Munich", "Athens", "Thessaloniki", "Budapest", "Debrecen", "Reykjavik", "Keflavik", "Dublin", "Cork", "Rome", "Milan", "Pristina", "Përnambuc", "Riga", "Liepāja", "Vilnius", "Kaunas", "Luxembourg City", "Esch-sur-Alzette", "Valletta", "Gozo", "Chisinau", "Bălți", "Monaco", "Monte Carlo", "Podgorica", "Tivat", "Amsterdam", "Rotterdam", "Oslo", "Bergen", "Kraków", "Warsaw", "Lisboa", "Porto", "Bucharest", "Cluj-Napoca", "Moscow", "St. Petersburg", "Belgrade", "Niš", "Bratislava", "Košice", "Ljubljana", "Maribor", "Madrid", "Barcelona", "Stockholm", "Gothenburg", "Bern", "Zurich", "Istanbul", "Ankara", "Kyiv", "Lviv", "Liverpool", "Manchester", "London", "Manchester", "Zagreb", "Split", "Paris", "Nice", "Athens", "Thessaloniki"};
 
     public Viagem(Companhia companhia, int lugaresTotais, String cidadeInicial, String cidadeFinal, Data dataPartida, Data dataChegada, int lugaresEconomicos, int lugaresExecutivos, int lugaresPrimeiraClasse) {
         try {
             counter++;
-            this.counter = counter;
+            counterNum= counter;
             this.companhia = companhia;
-            if (lugaresTotais > 50 && lugaresTotais < 200) {
+            //NAO COLOCAR MUITOS LUGARES TOTAIS, CASO CONTRARIO O PC DEMORA MUITO A CONSTRUIR OS BILHETES TODOS
+            if (lugaresTotais > 10 && lugaresTotais < 50) {
                 this.lugaresTotais = lugaresTotais;
             } else {
                 //throw new numeroMaxLugaresInvalidos;
                 throw new Exception();
             }
+            //this.cidadeInicial = cidadeInicial;
             setCidadeFinal(cidadeFinal);
             setCidadeInicial(cidadeInicial);
             if (dataChegada.isGreaterThan(dataPartida)) {
@@ -52,16 +56,11 @@ public class Viagem implements Serializable {
                 //throw new lugaresInvalidos
                 throw new Exception();
             }
-            this.nomeViagem = setNomeViagem(cidadeFinal, cidadeInicial, counter);
-            this.bilhetesTotais = new BilheteList(nomeViagem, lugaresTotais, lugaresEconomicos, lugaresExecutivos, lugaresPrimeiraClasse);
-            this.bilhetesParaVender = bilhetesTotais;
+            this.nomeViagem = setNomeViagem(cidadeFinal, cidadeInicial, counterNum);
+            BilheteList b = new BilheteList(nomeViagem, lugaresTotais, lugaresEconomicos, lugaresExecutivos, lugaresPrimeiraClasse);
+            bilhetesParaVender = b;
+            bilhetesVendidos = new BilheteList();
         }catch (Exception e) {}
-    }
-
-    public Viagem() {
-        this.bilhetesTotais = new BilheteList();
-        this.dataPartida = new Data();
-        this.dataChegada = new Data();
     }
 
     public boolean validadeCidade(String cidade) {
@@ -77,7 +76,9 @@ public class Viagem implements Serializable {
         char a2  =cidadeFinal.charAt(0) ;
         char b2  =cidadeFinal.charAt(1) ;
         char c2  =cidadeFinal.charAt(2) ;
-        String nomeViagem = a1+b1+c1+"x"+a2+b2+c2+counter;
+        String nomeViagem1 = new String(new char[]{a1,b1,c1});
+        String nomeViagem2 = new String(new char[]{a2,b2,c2});
+        String nomeViagem = nomeViagem1+"x"+nomeViagem2+counter;
         return nomeViagem;
     }
 
@@ -90,13 +91,6 @@ public class Viagem implements Serializable {
     public void setLugaresTotais(int lugaresTotais) {
         this.lugaresTotais = lugaresTotais;
     }
-    public int getLugaresUsados() {
-        int vendidos = lugaresTotais - bilhetesParaVender.sizeBilheteList();
-        return vendidos;
-    }
-    public void setLugaresUsados(int lugaresUsados) {
-        this.lugaresUsados = lugaresUsados;
-    }
     public String getCidadeFinal() {
         return cidadeFinal;
     }
@@ -104,7 +98,8 @@ public class Viagem implements Serializable {
         if(validadeCidade(cidadeFinal)){
             this.cidadeFinal = cidadeFinal;
         } else {
-            //throw new Cidadeexceotion
+            String msg ="Cidade invalida";
+            throw new RuntimeException(msg);
         }
     }
     public String getCidadeInicial() {
@@ -114,9 +109,26 @@ public class Viagem implements Serializable {
         if(validadeCidade(cidadeInicial)){
             this.cidadeInicial = cidadeInicial;
         } else {
-            //throw new Cidadeexceotion
+            String msg ="Cidade invalida";
+            throw new RuntimeException(msg);
         }
     }
+
+    public void alterarNumerosLugar(FBS fbs,Bilhete b) {
+        if(b.getTipoBilhete().equals(ECONOMICO)){
+            int i = fbs.getViagemList().getViagemByNomeViagem(nomeViagem).getLugaresEconomicos()+1;
+            fbs.getViagemList().getViagemByNomeViagem(nomeViagem).setLugaresEconomicos(i);
+        }
+        if(b.getTipoBilhete().equals(EXECUTIVO)){
+            int i = fbs.getViagemList().getViagemByNomeViagem(nomeViagem).getLugaresExecutivos()+1;
+            fbs.getViagemList().getViagemByNomeViagem(nomeViagem).setLugaresExecutivos(i);
+        }
+        if(b.getTipoBilhete().equals(EXECUTIVO)){
+            int i = fbs.getViagemList().getViagemByNomeViagem(nomeViagem).getLugaresEconomicos()+1;
+            fbs.getViagemList().getViagemByNomeViagem(nomeViagem).setLugaresEconomicos(i);
+        }
+    }
+
     public Data getDataPartida() {
         return dataPartida;
     }
@@ -132,26 +144,22 @@ public class Viagem implements Serializable {
     public int getLugaresEconomicos() {
         return lugaresEconomicos;
     }
-    public void setLugaresEconomicos(int lugaresEconomicos) {
-        this.lugaresEconomicos = lugaresEconomicos;
-    }
     public int getLugaresExecutivos() {
         return lugaresExecutivos;
-    }
-    public void setLugaresExecutivos(int lugaresExecutivos) {
-        this.lugaresExecutivos = lugaresExecutivos;
     }
     public int getLugaresPrimeiraClasse() {
         return lugaresPrimeiraClasse;
     }
+
+    public void setLugaresEconomicos(int lugaresEconomicos) {
+        this.lugaresEconomicos = lugaresEconomicos;
+    }
+    public void setLugaresExecutivos(int lugaresExecutivos) {
+        this.lugaresExecutivos = lugaresExecutivos;
+    }
+
     public void setLugaresPrimeiraClasse(int lugaresPrimeiraClasse) {
         this.lugaresPrimeiraClasse = lugaresPrimeiraClasse;
-    }
-    public BilheteList getBilheteList() {
-        return bilhetesTotais;
-    }
-    public void setBilheteList(BilheteList bilheteList) {
-        this.bilhetesTotais = bilheteList;
     }
     public Companhia getCompanhia() {
         return companhia;
@@ -160,19 +168,19 @@ public class Viagem implements Serializable {
         this.companhia = companhia;
     }
 
-    public BilheteList getBilhetesTotais() {
-        return bilhetesTotais;
-    }
-
-    public void setBilhetesTotais(BilheteList bilhetesTotais) {
-        this.bilhetesTotais = bilhetesTotais;
-    }
 
     public BilheteList getBilhetesParaVender() {
         return bilhetesParaVender;
     }
-
     public void setBilhetesParaVender(BilheteList bilhetesParaVender) {
         this.bilhetesParaVender = bilhetesParaVender;
+    }
+
+    public BilheteList getBilhetesVendidos() {
+        return bilhetesVendidos;
+    }
+
+    public void setBilhetesVendidos(BilheteList bilhetesVendidos) {
+        this.bilhetesVendidos = bilhetesVendidos;
     }
 }
